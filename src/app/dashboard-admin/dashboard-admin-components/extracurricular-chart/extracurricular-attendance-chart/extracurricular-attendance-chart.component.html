@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="scrollable-card">
     <mat-card-content>
         <h4 class="mb-32">Extracurricular Attendance Chart</h4>
 
@@ -9,13 +9,16 @@
                     </app-select-academic-year-only>
                 </div>
                 <div class="col-md-6">
-                    <app-select-school (schoolChanged)="onChangeSchool($event)">
+                    <app-select-school (schoolChanged)="onChangeSchool($event)" [isDisabled]="!paramForm.get('academic_year')?.value">
                     </app-select-school>
                 </div>
 
             </div>
         </div>
-        <div id="chart">
+        <div *ngIf="!hasData"  class="d-flex justify-content-center align-items-center mt-5 mb-5" style="height:30vh">
+            <h3> No Data Available Yet</h3>
+        </div>
+        <div id="chart" style="margin-top: 30px" *ngIf="hasData">
             <apx-chart
                     [series]="chartOptions.series"
                     [chart]="chartOptions.chart"

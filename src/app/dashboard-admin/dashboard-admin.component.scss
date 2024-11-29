@@ -1,17 +1,24 @@
 .chart-container {
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-around; /* or center, space-between */
+  gap: 16px; /* Adjust spacing between charts */
+  padding: 16px;
 }
 
-app-extracurricular-category-chart {
+.chart-container app-extracurricular-category-chart,
+.chart-container app-extracurricular-attendance-chart {
   flex: 1;
   min-width: 300px;
-  min-height: 420px;
+  min-height: 420px
 }
-
-app-extracurricular-attendance-chart {
-  flex: 1;
-  min-width: 300px;
-  min-height: 420px;
+@media (max-width: 768px) {
+  .chart-container {
+    grid-template-columns: 1fr; /* Single column layout for smaller screens */
+  }
+  .chart-container app-extracurricular-attendance-chart {
+    flex: 1;
+    min-width: 300px;
+    //min-height: 420px
+  }
 }

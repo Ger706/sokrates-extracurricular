@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card style="min-height:400px">
     <mat-card-content>
         <h4 class="mb-32">Extracurricular Category Chart</h4>
 
@@ -18,7 +18,10 @@
                 </div>
             </div>
         </div>
-        <div id="chart">
+        <div *ngIf="!hasData"  class="d-flex justify-content-center align-items-center mt-5 mb-5" style="height:30vh">
+            <h3> No Data Available Yet</h3>
+        </div>
+        <div id="chart" *ngIf="hasData">
             <apx-chart
                     [series]="chartOptions.series"
                     [chart]="chartOptions.chart"

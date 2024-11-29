@@ -104,15 +104,17 @@ export class ExtracurricularAttendanceChart implements OnInit {
   }
 
   onChangeAcademicYear(item: any) {
-    this.paramForm.controls['academic_year'].markAsTouched();
     console.log(item);
+    this.paramForm.controls['academic_year'].markAsTouched();
     this.paramForm.controls['academic_year'].setValue(item ? item.academic_year : null);
 
-    this.paramForm.controls['period_id'].markAsTouched();
-    this.paramForm.controls['period_id'].setValue(item ? item.period_id : null);
+    if (this.paramForm.value.school_id) {
+      this.getFilteredExcul();
+    }
   }
 
   onChangeSchool(item: any) {
+    console.log(item);
     this.paramForm.controls['school_id'].markAsTouched();
     this.paramForm.controls['school_id'].setValue(item ? item.school_id : null);
 

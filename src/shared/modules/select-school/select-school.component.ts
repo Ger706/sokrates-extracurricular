@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from "rxjs";
 import { SettingService } from "../../services/setting.service";
@@ -11,7 +11,7 @@ import {YearLevelMapping} from "../../models/year-level-mapping.model";
   templateUrl: './select-school.component.html',
   styleUrls: ['./select-school.component.css']
 })
-export class SelectSchoolComponent implements OnInit {
+export class SelectSchoolComponent implements OnInit, OnChanges {
 
   @Output() schoolChanged = new EventEmitter<School>();
 
@@ -21,6 +21,8 @@ export class SelectSchoolComponent implements OnInit {
   @Input() isDisabled: boolean = false;
   @Input()
   usingLocalStorage = true;
+
+  @Input() academic_year = null;
   placeholder = "";
   heading: string = 'School Selector';
   schools: School[] = [];
@@ -37,6 +39,20 @@ export class SelectSchoolComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
+  }
+  async ngOnChanges(changes: any): Promise<void> {
+
+    if (!this.academic_year) {
+      if (this.all) {
+        return;
+      }
+    }
+
+    await this.getSchools();
+  }
+
+    async getSchools() {
     this.schoolId = Number(this.settings.getConfig('schoolID')) || null;
     this.subscription = this.salService.schoolChanged.subscribe(
         (schools: School[]) => {
@@ -70,7 +86,6 @@ export class SelectSchoolComponent implements OnInit {
         }
     );
   }
-
   onChange(event: any) {
     this.schoolId = event ? event.school_id : null;
     // @ts-ignore
