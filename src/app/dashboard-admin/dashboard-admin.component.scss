@@ -1,0 +1,17 @@
+.chart-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+app-extracurricular-category-chart {
+  flex: 1;
+  min-width: 300px;
+  min-height: 420px;
+}
+
+app-extracurricular-attendance-chart {
+  flex: 1;
+  min-width: 300px;
+  min-height: 420px;
+}

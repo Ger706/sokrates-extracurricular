@@ -1,0 +1,18 @@
+<ng-select
+        (change)="onChange($event)"
+        [(ngModel)]="schoolValue"
+        [items]="schools"
+        [loading]="loading"
+        [multiple]="false"
+        bindLabel="school_name"
+        bindValue="school_id"
+        [disabled]="isDisabled"
+        [placeholder]="schoolValue? '' : ((all ? 'ALL' : 'SELECT') | translate) + ' ' + ('SCHOOL' | translate)"
+        class="selector-style">
+
+    <ng-template ng-option-tmp let-item="item">
+        <div class="custom-option-style" [ngClass]="{'disabled-option': isDisabled}">
+            {{ item.school_name || 'Unnamed School' }}
+        </div>
+    </ng-template>
+</ng-select>

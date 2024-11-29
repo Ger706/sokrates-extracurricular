@@ -1,0 +1,18 @@
+<ng-select
+        (change)="onChange($event)"
+        [(ngModel)]="academicYearValue"
+        [items]="academicYears"
+        [loading]="loading"
+        [multiple]="false"
+        bindLabel="academic_year"
+        bindValue="academic_year"
+        [disabled]="isDisabled"
+        [placeholder]="academicYearValue ? '' : ((all ? 'ALL' : 'SELECT') | translate) + ' ' + ('ACADEMIC_YEAR' | translate)"
+        class="selector-style">
+
+    <ng-template ng-option-tmp let-item="item">
+        <div class="custom-option-style" [ngClass]="{'disabled-option': isDisabled}">
+            {{ item.academic_year || 'Unnamed group' }}
+        </div>
+    </ng-template>
+</ng-select>

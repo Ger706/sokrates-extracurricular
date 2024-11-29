@@ -1,0 +1,33 @@
+<mat-card>
+  <mat-card-content>
+    <h4 class="mb-32">Extracurricular Participant Chart</h4>
+
+    <div class="max-width">
+        <div class="form-group row">
+            <div class="col-md-3">
+                <app-select-academic-year-only (academicYearChanged)="onChangeAcademicYear($event)">
+                </app-select-academic-year-only>
+            </div>
+            <div class="col-md-3">
+                <app-select-school-level-relation-v2 (schoolLevelRelationChanged)="onChangeSchoolLevelRelation($event)"
+                                                     [academic_year]="paramForm.get('academic_year')?.value"
+                                                     [all]="false"
+                                                     [task]="task"
+                                                     [isDisabled]="!paramForm.get('academic_year')?.value">
+                </app-select-school-level-relation-v2>
+            </div>
+        </div>
+        <div *ngIf="!hasData"  class="d-flex justify-content-center align-items-center mt-5 mb-5" style="height:30vh">
+            <h3> No Data Available Yet</h3>
+        </div>
+        <div *ngIf="hasData">
+            <apx-chart [series]="exculParticipant.series" [dataLabels]="exculParticipant.dataLabels"
+                       [chart]="exculParticipant.chart" [legend]="exculParticipant.legend"
+                       [xaxis]="exculParticipant.xaxis" [grid]="exculParticipant.grid"
+                       [stroke]="exculParticipant.stroke" [tooltip]="exculParticipant.tooltip"
+                       [plotOptions]="exculParticipant.plotOptions">
+            </apx-chart>
+        </div>
+    </div>
+  </mat-card-content>
+</mat-card>

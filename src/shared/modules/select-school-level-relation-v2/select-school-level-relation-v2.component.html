@@ -1,0 +1,24 @@
+<ng-select
+        (change)="onChange($event)"
+        (open)="onOpen()"
+        [(ngModel)]="schoolLevelRelationValue"
+        [disabled]="isDisabled"
+        [items]="schoolLevelRelationsFiltered"
+        [loading]="loading"
+        [multiple]="multiple"
+        [selectableGroup]="false"
+        bindLabel="school_short_address"
+        groupBy="school_name"
+        class="selector-style"
+        [placeholder]="schoolLevelRelationValue ? '' : ((all ? 'ALL' : 'SELECT') | translate) + ' ' + ((text ? 'SCHOOL_LOCATION' : 'SCHOOL_LEVEL') | translate)">
+    <ng-template ng-option-tmp let-item="item" let-index="index">
+        <div [ngClass]="{'custom-option-style': true, 'disabled-option': isDisabled}">
+            {{ item.school_short_address }}
+        </div>
+    </ng-template>
+
+    <ng-template ng-optgroup-tmp let-item="item">
+        <div class="group-style">{{ item.school_name || 'Unnamed group' }}</div>
+    </ng-template>
+
+</ng-select>

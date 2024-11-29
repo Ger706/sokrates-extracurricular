@@ -1,0 +1,20 @@
+{
+	"OVERVIEW":"Gambaran",
+	"YEAR_LEVEL":"Tahun Level",
+	"PLEASE_SELECT_EXTR_RU":"Silakan Pilih Aturan Ekstrakurikuler",
+	"SCHOOL_LOCATION":"Lokasi Sekolah",
+	"PLEASE_SELECT_SCHO_LOC":"Silakan Pilih Lokasi Sekolah",
+	"INVALID_SER_RES":"Respons server tidak valid!",
+	"EXTRACURRICULAR_RULE":"Aturan Ekstrakurikuler",
+	"EXTRACURRICULAR_NAME":"Nama Ekstrakurikuler",
+	"EX_DATA_IS_EMPTY":"Data ekstrakurikuler kosong",
+	"CANCEL":"Batal",
+	"SAVE":"Simpan",
+	"ADD_MAPPING":"Tambahkan Pemetaan",
+	"SCHOOL_AND_YEAR_LEVEL":"Tingkat Sekolah dan Tahun",
+	"ACTION":"Tindakan",
+	"DELETE":"HAPUS",
+	"THE_SCHOOL_LOCATION_LOCATION_FIELD_IS_REQ":"Lokasi Sekolah wajib diisi",
+	"EXTRACURRICULAR_RULE_IS_REQ":"Diperlukan Aturan ekstrakurikuler",
+	"RULE_DESC":"Deskripsi Aturan"
+}

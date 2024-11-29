@@ -15,9 +15,10 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { TooltipsComponent } from './components/tooltips/tooltips.component';
-import { ProductComponent } from './dashboard/dashboard-components/product/product.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProductComponent } from './dashboard-admin/dashboard-admin-components/product/product.component';
+import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 import { FullComponent } from './layouts/full/full.component';
+import {UnauthenticatedGuard} from "../shared/guard/unauthenticated.guard";
 
 const routes: Routes = [
   {
@@ -25,7 +26,7 @@ const routes: Routes = [
     component:FullComponent,
     children: [
       {path:"", redirectTo:"/home", pathMatch:"full"},
-      {path:"home", component:DashboardComponent},
+      {path:"home", component:DashboardAdminComponent},
       {path:"alerts", component:AlertsComponent},
       {path:"forms", component:FormsComponent},
       {path:"table", component:ProductComponent},
@@ -48,6 +49,28 @@ const routes: Routes = [
   {path:"", redirectTo:"/home", pathMatch:"full"},
   {path:"**", redirectTo:"/home", pathMatch:"full"},
 ];
+
+// children: [
+//   {
+//     path: '',
+//     redirectTo: 'auth',
+//     pathMatch: 'full'
+//   },
+//   {
+//     path: 'auth',
+//     loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule),
+//     canActivate: [UnauthenticatedGuard]
+//   },
+//   {
+//     path: 'dashboard-admin',
+//     loadChildren: () => import('./dashboard-admin/dashboard-admin.module').then(m => m.DashboardAdminModule),
+//     canActivate: [UnauthenticatedGuard]
+//   },
+//   {
+//     path: '**',
+//     redirectTo: 'client'
+//   }
+// ]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
