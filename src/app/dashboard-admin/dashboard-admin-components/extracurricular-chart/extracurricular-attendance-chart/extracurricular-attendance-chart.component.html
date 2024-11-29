@@ -1,0 +1,34 @@
+<mat-card>
+    <mat-card-content>
+        <h4 class="mb-32">Extracurricular Attendance Chart</h4>
+
+        <div class="max-width">
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <app-select-academic-year-only (academicYearChanged)="onChangeAcademicYear($event)">
+                    </app-select-academic-year-only>
+                </div>
+                <div class="col-md-6">
+                    <app-select-school (schoolChanged)="onChangeSchool($event)">
+                    </app-select-school>
+                </div>
+
+            </div>
+        </div>
+        <div id="chart">
+            <apx-chart
+                    [series]="chartOptions.series"
+                    [chart]="chartOptions.chart"
+                    [dataLabels]="chartOptions.dataLabels"
+                    [plotOptions]="chartOptions.plotOptions"
+                    [xaxis]="chartOptions.xaxis"
+                    [stroke]="chartOptions.stroke"
+                    [fill]="chartOptions.fill"
+                    [yaxis]="chartOptions.yaxis"
+                    [title]="chartOptions.title"
+                    [tooltip]="chartOptions.tooltip"
+                    [legend]="chartOptions.legend"
+            ></apx-chart>
+        </div>
+    </mat-card-content>
+</mat-card>

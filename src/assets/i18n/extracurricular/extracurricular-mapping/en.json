@@ -1,0 +1,20 @@
+{
+	"OVERVIEW":"Overview",
+	"YEAR_LEVEL":"Year Level",
+	"PLEASE_SELECT_EXTR_RU":"Please Select Extracurricular Rule",
+	"SCHOOL_LOCATION":"School Location",
+	"PLEASE_SELECT_SCHO_LOC":"Please Select School Location",
+	"INVALID_SER_RES":"Invalid server response!",
+	"EXTRACURRICULAR_RULE":"Extracurricular Rule",
+	"EXTRACURRICULAR_NAME":"Extracurricular Name",
+	"EX_DATA_IS_EMPTY":"Extracurricular Data is Empty",
+	"CANCEL":"Cancel",
+	"SAVE":"Save",
+	"ADD_MAPPING":"Add Mapping",
+	"SCHOOL_AND_YEAR_LEVEL":"School and Year Level",
+	"ACTION":"Action",
+	"DELETE":"DELETE",
+	"THE_SCHOOL_LOCATION_LOCATION_FIELD_IS_REQ":"The School Location field is required",
+	"EXTRACURRICULAR_RULE_IS_REQ":"Extracurricular Rule is required",
+	"RULE_DESC":"Rule Description"
+}
