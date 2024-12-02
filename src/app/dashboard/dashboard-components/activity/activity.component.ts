@@ -7,7 +7,7 @@ interface activity {
 }
 
 @Component({
-  selector: 'app-activity',
+  selector: 'app-extracurricular-activity',
   templateUrl: './activity.component.html',
 })
 export class ActivityComponent implements OnInit {

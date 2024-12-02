@@ -1,0 +1,12 @@
+<ng-select (change)="onChange($event)"
+           [(ngModel)]="exculValue"
+           [disabled]="isDisabled"
+           [items]="exculList"
+           [loading]="loading"
+           bindLabel="extracurricular_name"
+           [placeholder]= "exculValue ? '' : ((all ? 'ALL' : 'SELECT') | translate) + ' ' + ('EXCUL' | translate)"
+           class="selector-style">
+  <ng-template ng-option-tmp let-item="item">
+    <div class="custom-option-style"  title="{{item.extracurricular_description}}">{{item.extracurricular_name}}</div>
+  </ng-template>
+</ng-select>

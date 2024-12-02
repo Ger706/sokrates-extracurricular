@@ -1,0 +1,57 @@
+<mat-card style="min-height: 460px">
+  <mat-card-content class="scrollable-content">
+    <h4 class="mb-20">Extracurricular Information</h4>
+      <div class="container">
+          <div class="row">
+              <!-- First Column: Select School Level Relation -->
+              <div class="col-md-6" style="padding-right: 10px;">
+                  <app-select-school-level-relation-v2
+                          (schoolLevelRelationChanged)="onChangeSchoolLevelRelation($event)"
+                          [academic_year]="currentAcademic?.academic_year ?? null"
+                          [all]="false"
+                          [task]="task"
+                          [isDisabled]="!currentAcademic">
+                  </app-select-school-level-relation-v2>
+              </div>
+
+              <!-- Second Column: Select Excul -->
+              <div class="col-md-6" style="padding: 0px;">
+                  <app-select-excul
+                          (exculChanged)="onChangeExcul($event)"
+                          [academic_year]="currentAcademic?.academic_year ?? null"
+                          [school_location_id]="paramForm.get('school_location_id')?.value"
+                          [isDisabled]="!paramForm.get('school_location_id')?.value">
+                  </app-select-excul>
+              </div>
+          </div>
+      </div>
+
+      <p class="fw-bold fs-15 d-flex justify-content-center align-items-center mb-5" style="margin-top: 100px" *ngIf="!hasData && !loading"> No Data</p>
+      <div *ngIf="!hasData && loading" class="d-flex justify-content-center align-items-center mb-5" style="margin-top: 50px">
+          <mat-spinner></mat-spinner>
+      </div>
+      <div id="chart" style="margin-top: 30px" *ngIf="hasData && !loading">
+          <apx-chart
+                  [series]="chartOptions.series"
+                  [chart]="chartOptions.chart"
+                  [dataLabels]="chartOptions.dataLabels"
+                  [plotOptions]="chartOptions.plotOptions"
+                  [xaxis]="chartOptions.xaxis"
+                  [stroke]="chartOptions.stroke"
+                  [fill]="chartOptions.fill"
+                  [yaxis]="chartOptions.yaxis"
+                  [title]="chartOptions.title"
+                  [tooltip]="chartOptions.tooltip"
+                  [legend]="chartOptions.legend"
+          ></apx-chart>
+      </div>
+      <div id="chartD" *ngIf="hasData && !loading">
+          <apx-chart
+                  [series]="donutOptions.series"
+                  [chart]="donutOptions.chart"
+                  [labels]="donutOptions.labels"
+                  [responsive]="donutOptions.responsive"
+          ></apx-chart>
+      </div>
+  </mat-card-content>
+</mat-card>

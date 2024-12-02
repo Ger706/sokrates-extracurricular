@@ -90,7 +90,6 @@ export class ExtracurricularCategorychart implements OnInit {
 
   onChangeAcademicYear(item: any) {
     this.paramForm.controls['academic_year'].markAsTouched();
-    console.log(item);
     this.paramForm.controls['academic_year'].setValue(item ? item.academic_year : null);
 
     this.paramForm.controls['period_id'].markAsTouched();

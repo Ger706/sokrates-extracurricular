@@ -21,6 +21,10 @@ import {
   ExtracurricularAttendanceChart
 } from "./dashboard-admin-components/extracurricular-chart/extracurricular-attendance-chart/extracurricular-attendance-chart";
 import {SelectSchoolModule} from "../../shared/modules/select-school/select-school.module";
+import {
+  ExtracurricularInformationComponent
+} from "./dashboard-admin-components/extracurricular-information/extracurricular-information.component";
+import {SelectExculModule} from "../../shared/modules/select-excul/select-excul.module";
 
 
 
@@ -32,6 +36,7 @@ import {SelectSchoolModule} from "../../shared/modules/select-school/select-scho
     ExtracurricularCategorychart,
     ExtracurricularAttendanceChart,
     ExtracurricularActivityComponent,
+    ExtracurricularInformationComponent,
     ProductComponent,
     CardsComponent,
   ],
@@ -42,7 +47,8 @@ import {SelectSchoolModule} from "../../shared/modules/select-school/select-scho
     NgApexchartsModule,
     SelectAcademicYearOnlyModule,
     SelectSchoolLevelRelationV2Module,
-    SelectSchoolModule
+    SelectSchoolModule,
+    SelectExculModule
   ],
   providers: [
   ],

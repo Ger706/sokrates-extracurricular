@@ -7,14 +7,20 @@ import {AcademicYear} from "../../../../shared/models/academic-year.model";
 import {AcademicCalendarService} from "../../../../shared/services/academic-calendar.service";
 
 interface activity {
-  time: string;
-  ringColor: string;
-  message: string;
+  description: string;
+  start_date: string;
+  schedule: [{
+    start_time: string;
+    ringColor: string;
+    extracurricular_name: string;
+    venue: string;
+  }];
 }
 
 @Component({
-  selector: 'app-activity',
+  selector: 'app-extracurricular-activity',
   templateUrl: './extracurricular-activity.component.html',
+  styleUrls: ['./extracurricular-activity.component.scss'],
 })
 export class ExtracurricularActivityComponent implements OnInit {
 
@@ -25,36 +31,9 @@ export class ExtracurricularActivityComponent implements OnInit {
     translate.load('main', 'extracurricular/excul-participant');
   }
 
-  activity: activity [] = [
-    {
-      time: "09.50",
-      ringColor: "ring-success",
-      message: "Meeting with John",
-    },
-    {
-      time: "09.46",
-      ringColor: "ring-primary",
-      message: "Payment received from John Doe of $385.90",
-    },
-    {
-      time: "09.47",
-      ringColor: "ring-info",
-      message: "Project Meeting",
-    },
-    {
-      time: "09.48",
-      ringColor: "ring-warning",
-      message: "New Sale recorded #ML-3467",
-    },
-    {
-      time: "09.49",
-      ringColor: "ring-danger",
-      message: "Payment was made of $64.95 to Michael Anderson",
-    },
-  ]
+  activity: activity [] = [];
   paramForm: FormGroup;
   selectedSchoolLevel = null;
-  dataExcul = [];
   hasData: boolean = false;
   task = null;
   loading = false;
@@ -103,6 +82,7 @@ export class ExtracurricularActivityComponent implements OnInit {
         });
   }
   getExtracurricularCurrentActivity() {
+    this.activity = [];
     this.loading = true;
     this.hasData = false;
     this.exculService.getCurrentDateExtracurricular({
@@ -115,9 +95,24 @@ export class ExtracurricularActivityComponent implements OnInit {
               // @ts-ignore
               if (response['error'] === 0) {
                 // @ts-ignore
-                this.dataExcul = response['result'].slice();
-
-                this.hasData = this.dataExcul.length > 0;
+                this.activity = response['result']['data'].slice();
+                this.hasData = this.activity.length > 0;
+                // @ts-ignore
+                // const newData: activity =
+                //     {
+                //       description: 'No Activity Yet',
+                //       start_date: '',
+                //       schedule: [{
+                //         start_time: '00:00',
+                //         ringColor: 'ring-success',
+                //         extracurricular_name: 'No Extracurricular Activity',
+                //         venue: ''
+                //       }]
+                //     };
+                // for (let i = 0; i < 4 - this.activity.length; i++ ) {
+                //   this.activity.push(newData as activity);
+                // }
+                // console.log(this.activity);
                 this.loading = false;
                 this.cd.detectChanges();
               } else {

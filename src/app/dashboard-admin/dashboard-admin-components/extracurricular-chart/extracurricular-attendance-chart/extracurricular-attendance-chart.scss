@@ -5,9 +5,15 @@
     min-height:400px;
     display: flex;
     flex-direction: column;
-    max-height: 80vh;
+    max-height: 400px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
-
+.scrollable-card::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
 mat-card-content {
     flex-grow: 1;
     overflow-y: auto;

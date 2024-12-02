@@ -285,7 +285,6 @@ export class SelectSchoolLevelRelationV2Component implements OnInit, OnChanges {
       // @ts-ignore
       this.schoolLevelRelationValue = this.schoolLevelRelationsFiltered
         .find(i => i.school_level_id === val.school_level_id && i.school_location_id === val.school_location_id);
-      console.log(this.schoolLevelRelationValue);
       if (this.schoolLevelRelationValue) {
         this.schoolLevelRelationChanged.emit(this.schoolLevelRelationValue);
       }
@@ -296,7 +295,6 @@ export class SelectSchoolLevelRelationV2Component implements OnInit, OnChanges {
     if (!this.usingLocalStorage) {
       return;
     }
-    console.log(this.schoolLevelRelationValue);
     this.setting.setConfig(this.localStorageName, JSON.stringify(this.schoolLevelRelationValue));
   }
 

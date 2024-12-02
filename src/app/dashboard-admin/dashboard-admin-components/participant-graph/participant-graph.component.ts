@@ -72,18 +72,10 @@ export class ParticipantGraphComponent implements OnInit{
       dataLabels: {
         enabled: false,
       },
-
       stroke: {
         show: true,
         width: 5,
         colors: ['none']
-      },
-
-      plotOptions: {
-        bar: {
-          columnWidth: '45%',
-          borderRadius: 5,
-        },
       },
     }
   }
@@ -93,6 +85,7 @@ export class ParticipantGraphComponent implements OnInit{
   hasData: boolean = false;
   task = null;
   loading = false;
+
   ngOnInit() {
     this.initForm();
   }
@@ -110,7 +103,6 @@ export class ParticipantGraphComponent implements OnInit{
 
   onChangeAcademicYear(item: any) {
     this.paramForm.controls['academic_year'].markAsTouched();
-    console.log(item);
     this.paramForm.controls['academic_year'].setValue(item ? item.academic_year : null);
 
     this.paramForm.controls['period_id'].markAsTouched();
@@ -134,6 +126,7 @@ export class ParticipantGraphComponent implements OnInit{
   getFilteredExcul() {
     this.loading = true;
     this.hasData = false;
+
     this.exculService.getFilteredExculParticipant({
       name: this.paramForm.value.name || null,
       academic_year: this.paramForm.value.academic_year || null,
@@ -143,40 +136,43 @@ export class ParticipantGraphComponent implements OnInit{
       year_level_id: this.paramForm.value.year_level_id || null,
       school_level_relation_id: this.paramForm.value.school_level_relation_id || null,
       paginate: true,
-      task: 'EXTRACURRICULAR_PARTICIPANT_VIEW'
-    })
-        .subscribe(
-            (response: Extracurricular[]) => {
-              // @ts-ignore
-              if (response['error'] === 0) {
-                // @ts-ignore
-                this.dataExcul = response['result']['data'].slice();
-                this.hasData = this.dataExcul.length > 0;
-                const participantAmount = this.dataExcul.map((i: any) => i.participant_count);
-                const extracurricularName = this.dataExcul.map((i: any) => i.extracurricular_name);
+      task: 'EXTRACURRICULAR_PARTICIPANT_VIEW',
+    }).subscribe(
+        (response: Extracurricular[]) => {
+          // @ts-ignore
+          if (response['error'] === 0) {
+            // @ts-ignore
+            this.dataExcul = response['result']['data'].slice();
+            this.hasData = this.dataExcul.length > 0;
+            const participantAmount = this.dataExcul.map((i: any) => i.participant_count);
+            const extracurricularName = this.dataExcul.map((i: any) => i.extracurricular_name);
 
-                this.exculParticipant.series = [
-                  {
-                    name: 'Participant Amount',
-                    data: participantAmount,
-                    color: "#fb9678",
-                  },
-                ]
-                this.exculParticipant.xaxis = {
-                  categories: extracurricularName
-                };
-                this.loading = false;
-                this.cd.detectChanges();
-              } else {
-                this.loading = false;
-                // this.toastr.error('[' + this.heading + '] ' + response['message'], 'Invalid Response');
+            this.exculParticipant.series = [
+              {
+                name: 'Participant Amount',
+                data: participantAmount,
               }
-            },
-            error => {
-              this.loading = false;
-              // this.toastr.error('[' + this.heading + '] Cannot access server endpoint!', 'Connection Error');
-            });
+            ];
+            this.exculParticipant.xaxis = {
+              categories: extracurricularName,
+            };
+
+            this.exculParticipant.plotOptions = {
+              bar: {
+                columnWidth: '45%',
+                    borderRadius: 5,
+                    distributed: true,
+              },
+            };
+
+            this.loading = false;
+          } else {
+            this.loading = false;
+          }
+        },
+        (error) => {
+          this.loading = false;
+        }
+    );
   }
-
-
 }

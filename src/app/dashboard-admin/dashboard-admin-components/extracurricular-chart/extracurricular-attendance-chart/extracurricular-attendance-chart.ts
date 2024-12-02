@@ -50,11 +50,6 @@ export class ExtracurricularAttendanceChart implements OnInit {
     translate.load("main", "extracurricular/excul-participant");
 
     this.chartOptions = {
-      chart: {
-        type: "bar",
-        height: 150,
-        stacked: true
-      },
       plotOptions: {
         bar: {
           horizontal: true
@@ -105,25 +100,17 @@ export class ExtracurricularAttendanceChart implements OnInit {
   }
 
   onChangeAcademicYear(item: any) {
-    console.log(item);
     this.paramForm.controls['academic_year'].markAsTouched();
     this.paramForm.controls['academic_year'].setValue(item ? item.academic_year : null);
-
-    if (this.paramForm.value.school_id) {
       this.getFilteredExcul();
-    }
   }
 
   onChangeSchool(item: any) {
-    console.log(item);
     this.paramForm.controls['school_id'].markAsTouched();
     this.paramForm.controls['school_id'].setValue(item ? item.school_id : null);
 
     this.selectedSchool = item ? item.school_id : null;
-
-    if (this.paramForm.value.school_id) {
       this.getFilteredExcul();
-    }
   }
 
   getFilteredExcul() {
@@ -154,6 +141,11 @@ export class ExtracurricularAttendanceChart implements OnInit {
                     data: absent,
                   }
                 ]
+                this.chartOptions.chart = {
+                  type: "bar",
+                  stacked: true,
+                  height: this.dataExcul.length < 2 ? 250 : 60 * this.dataExcul.length
+                };
 
                 this.chartOptions.xaxis = {
                   categories: schoolShortAddress,

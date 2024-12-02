@@ -36,5 +36,6 @@
 	"APPROVE_SELECTED": "Approve Selected",
 	"REJECT_SELECTED": "Reject Selected",
   "TOTAL_SELECTED_DATA":"Total Selected Data",
-  "EXPORT_TO_PDF":"Export To Pdf"
+  "EXPORT_TO_PDF":"Export To Pdf",
+	"EXCUL": "Excul"
 }

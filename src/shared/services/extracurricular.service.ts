@@ -67,6 +67,11 @@ export class ExtracurricularService {
 
         return this.http.post<Extracurricular[]>(requestUrl, JSON.parse(JSON.stringify(param)), this.settings.httpOptionWithToken());
     }
+    getExtracurricularGenderSummary(exculId: any): Observable<Extracurricular[]> {
+        const requestUrl =  this.settings.getConfig('client.url') + `/customer/extracurricular/excul/get-gender/${exculId}`;
+
+        return this.http.get<Extracurricular[]>(requestUrl, this.settings.httpOptionWithToken());
+    }
 
     addExcul(excul: Extracurricular) {
         const requestUrl = this.settings.getConfig('client.url') + '/customer/extracurricular/excul';

@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 interface cards {
   image: string;
   btn: string;
+  title: string;
+  description: string;
 }
 
 @Component({
@@ -18,16 +20,23 @@ export class CardsComponent implements OnInit {
 
   cards: cards [] = [
     {
-      image: "assets/images/u2.webp",
+      image: "assets/images/excul4.jpg",
       btn: "warn",
+      title: 'Create an Extracurricular Activity',
+      description: 'Add a new extracurricular activity to the system. Provide essential details information to create a new event for students to participate in.'
+
     },
     {
-      image: "assets/images/u3.webp",
+      image: "assets/images/excul2.jpg",
       btn: "primary",
+      title: 'View Extracurricular Participants',
+      description: 'View a list of students or participants enrolled in a particular extracurricular activity. You can see their details for better management and tracking.'
     },
     {
-      image: "assets/images/u4.webp",
+      image: "assets/images/excul3.jpg",
       btn: "accent",
+      title: 'Set Extracurricular Activity Schedule',
+      description: 'Define the schedule for an extracurricular activity. This ensures that the activity is organized and participants can plan accordingly.'
     },
   ]
 

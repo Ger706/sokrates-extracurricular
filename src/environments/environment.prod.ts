@@ -1,7 +1,4 @@
-import {version} from '../../package.json';
-
 export const environment = {
-  appVersion: version,
   production: true,
   next: 'https://next.sokrates.xyz',
   local: false,

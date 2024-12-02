@@ -90,7 +90,6 @@ export class SelectSchoolComponent implements OnInit, OnChanges {
     this.schoolId = event ? event.school_id : null;
     // @ts-ignore
     this.settings.setConfig('schoolID', this.schoolId ? String(this.schoolId) : null);
-    console.log(event);
     this.schoolChanged.emit(event);
   }
 }
