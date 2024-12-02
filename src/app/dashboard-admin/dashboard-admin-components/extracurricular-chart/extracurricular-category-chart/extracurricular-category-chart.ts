@@ -71,6 +71,7 @@ export class ExtracurricularCategorychart implements OnInit {
   dataExcul = [];
   hasData: boolean = false;
   task = null;
+  loading = false;
 
   ngOnInit() {
     this.initForm();
@@ -111,6 +112,8 @@ export class ExtracurricularCategorychart implements OnInit {
   }
 
   getFilteredExculCategoryTotal() {
+    this.loading = true;
+    this.hasData = false;
     this.exculService.getTotalExculCategory({
       academic_year: this.paramForm.value.academic_year || null,
       school_location_id: this.paramForm.value.school_location_id || null,
@@ -128,12 +131,15 @@ export class ExtracurricularCategorychart implements OnInit {
                 this.chartOptions.series = exculTotal;
                 this.chartOptions.labels = categoryList;
                 // };
+                this.loading = false;
                 this.cd.detectChanges();
               } else {
+                this.loading = false;
                 // this.toastr.error('[' + this.heading + '] ' + response['message'], 'Invalid Response');
               }
             },
             error => {
+              this.loading = false;
               // this.toastr.error('[' + this.heading + '] Cannot access server endpoint!', 'Connection Error');
             });
   }

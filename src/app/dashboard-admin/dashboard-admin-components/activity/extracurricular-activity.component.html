@@ -1,0 +1,27 @@
+<!-- Daily Activity -->
+<mat-card>
+  <mat-card-content>
+    <h4 class="mb-20">Extracurricular Activity</h4>
+
+      <div class="col-md-6 mb-20" style="padding: 0px;">
+          <app-select-school-level-relation-v2 (schoolLevelRelationChanged)="onChangeSchoolLevelRelation($event)"
+                                               [academic_year]="currentAcademic?.academic_year ?? null"
+                                               [all]="false"
+                                               [task]="task"
+                                               [isDisabled]="!currentAcademic">
+          </app-select-school-level-relation-v2>
+      </div>
+
+    <div class="d-flex" *ngFor="let activity of activity">
+      <p class="fw-bold ps-16 pe-20 fs-12">{{ activity.time }}</p>
+      <div class="activity-border">
+        <div class="deep">
+          <div class="activity-ring">
+            <div class="ring {{ activity.ringColor }}"></div>
+          </div>
+        </div>
+        <p class="ps-20 pe-16 activity-message">{{ activity.message }}</p>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

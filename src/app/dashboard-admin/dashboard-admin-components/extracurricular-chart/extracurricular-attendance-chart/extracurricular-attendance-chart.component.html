@@ -15,10 +15,13 @@
 
             </div>
         </div>
-        <div *ngIf="!hasData"  class="d-flex justify-content-center align-items-center mt-5 mb-5" style="height:30vh">
+        <div *ngIf="!hasData && !loading"  class="d-flex justify-content-center align-items-center mt-5 mb-5" style="height:30vh">
             <h3> No Data Available Yet</h3>
         </div>
-        <div id="chart" style="margin-top: 30px" *ngIf="hasData">
+        <div *ngIf="!hasData && loading" class="d-flex justify-content-center align-items-center mb-5" style="margin-top: 50px">
+            <mat-spinner></mat-spinner>
+        </div>
+        <div id="chart" style="margin-top: 30px" *ngIf="hasData && !loading">
             <apx-chart
                     [series]="chartOptions.series"
                     [chart]="chartOptions.chart"

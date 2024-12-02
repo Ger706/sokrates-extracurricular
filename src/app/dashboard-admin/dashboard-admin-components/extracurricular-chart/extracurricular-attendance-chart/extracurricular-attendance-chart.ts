@@ -92,6 +92,7 @@ export class ExtracurricularAttendanceChart implements OnInit {
   dataExcul = [];
   hasData: boolean = false;
   task = null;
+  loading = false;
 
   ngOnInit() {
     this.initForm();
@@ -126,6 +127,8 @@ export class ExtracurricularAttendanceChart implements OnInit {
   }
 
   getFilteredExcul() {
+    this.hasData = false;
+    this.loading = true;
     this.exculService.getAttendanceSummary({
       academic_year: this.paramForm.value.academic_year || null,
       school_id: this.paramForm.value.school_id || null
@@ -159,13 +162,16 @@ export class ExtracurricularAttendanceChart implements OnInit {
                       return val;
                     }
                   }
-                },
+                };
+                this.loading = false;
                 this.cd.detectChanges();
               } else {
+                this.loading = false;
                 // this.toastr.error('[' + this.heading + '] ' + response['message'], 'Invalid Response');
               }
             },
             error => {
+              this.loading = false;
               // this.toastr.error('[' + this.heading + '] Cannot access server endpoint!', 'Connection Error');
             });
   }

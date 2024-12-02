@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DemoFlexyModule } from '../demo-flexy-module'
 import { DashboardAdminComponent } from './dashboard-admin.component';
 import { ParticipantGraphComponent } from './dashboard-admin-components/participant-graph/participant-graph.component';
-import { ActivityComponent } from './dashboard-admin-components/activity/activity.component';
+import { ExtracurricularActivityComponent } from './dashboard-admin-components/activity/extracurricular-activity.component';
 import { ProductComponent } from './dashboard-admin-components/product/product.component';
 import { CardsComponent } from './dashboard-admin-components/cards/cards.component';
 import { FormsModule } from '@angular/forms';
@@ -31,7 +31,7 @@ import {SelectSchoolModule} from "../../shared/modules/select-school/select-scho
     ParticipantGraphComponent,
     ExtracurricularCategorychart,
     ExtracurricularAttendanceChart,
-    ActivityComponent,
+    ExtracurricularActivityComponent,
     ProductComponent,
     CardsComponent,
   ],
@@ -49,7 +49,7 @@ import {SelectSchoolModule} from "../../shared/modules/select-school/select-scho
   exports: [
     DashboardAdminComponent,
     ParticipantGraphComponent,
-    ActivityComponent,
+    ExtracurricularActivityComponent,
     ProductComponent,
   ]
 })

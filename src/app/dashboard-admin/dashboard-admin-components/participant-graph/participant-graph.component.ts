@@ -92,7 +92,7 @@ export class ParticipantGraphComponent implements OnInit{
   dataExcul = [];
   hasData: boolean = false;
   task = null;
-
+  loading = false;
   ngOnInit() {
     this.initForm();
   }
@@ -132,6 +132,8 @@ export class ParticipantGraphComponent implements OnInit{
   }
 
   getFilteredExcul() {
+    this.loading = true;
+    this.hasData = false;
     this.exculService.getFilteredExculParticipant({
       name: this.paramForm.value.name || null,
       academic_year: this.paramForm.value.academic_year || null,
@@ -152,7 +154,6 @@ export class ParticipantGraphComponent implements OnInit{
                 this.hasData = this.dataExcul.length > 0;
                 const participantAmount = this.dataExcul.map((i: any) => i.participant_count);
                 const extracurricularName = this.dataExcul.map((i: any) => i.extracurricular_name);
-                console.log(participantAmount);
 
                 this.exculParticipant.series = [
                   {
@@ -164,12 +165,15 @@ export class ParticipantGraphComponent implements OnInit{
                 this.exculParticipant.xaxis = {
                   categories: extracurricularName
                 };
+                this.loading = false;
                 this.cd.detectChanges();
               } else {
+                this.loading = false;
                 // this.toastr.error('[' + this.heading + '] ' + response['message'], 'Invalid Response');
               }
             },
             error => {
+              this.loading = false;
               // this.toastr.error('[' + this.heading + '] Cannot access server endpoint!', 'Connection Error');
             });
   }

@@ -42,7 +42,7 @@ export class SelectSchoolLevelRelationV2Component implements OnInit, OnChanges {
   task: string | null = null;
 
   @Input()
-  academic_year = null;
+  academic_year : string | null = null;
 
   @Input()
   period_setup_id = null;
