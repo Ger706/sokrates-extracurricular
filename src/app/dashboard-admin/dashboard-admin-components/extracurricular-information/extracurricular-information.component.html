@@ -9,7 +9,6 @@
                           (schoolLevelRelationChanged)="onChangeSchoolLevelRelation($event)"
                           [academic_year]="currentAcademic?.academic_year ?? null"
                           [all]="false"
-                          [task]="task"
                           [isDisabled]="!currentAcademic">
                   </app-select-school-level-relation-v2>
               </div>
@@ -27,7 +26,7 @@
       </div>
 
       <p class="fw-bold fs-15 d-flex justify-content-center align-items-center mb-5" style="margin-top: 100px" *ngIf="!hasData && !loading"> No Data</p>
-      <div *ngIf="!hasData && loading" class="d-flex justify-content-center align-items-center mb-5" style="margin-top: 50px">
+      <div *ngIf="!hasData && loading" class="d-flex justify-content-center align-items-center mb-5" style="margin-top: 125px">
           <mat-spinner></mat-spinner>
       </div>
       <div id="chart" style="margin-top: 30px" *ngIf="hasData && !loading">
@@ -45,7 +44,7 @@
                   [legend]="chartOptions.legend"
           ></apx-chart>
       </div>
-      <div id="chartD" *ngIf="hasData && !loading">
+      <div id="chartD" style="margin-left: 30px" *ngIf="hasDataAttendance && !loading">
           <apx-chart
                   [series]="donutOptions.series"
                   [chart]="donutOptions.chart"

@@ -112,7 +112,6 @@ export class ExtracurricularActivityComponent implements OnInit {
                 // for (let i = 0; i < 4 - this.activity.length; i++ ) {
                 //   this.activity.push(newData as activity);
                 // }
-                // console.log(this.activity);
                 this.loading = false;
                 this.cd.detectChanges();
               } else {

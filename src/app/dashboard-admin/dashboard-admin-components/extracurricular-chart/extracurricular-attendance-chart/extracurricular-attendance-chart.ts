@@ -66,7 +66,7 @@ export class ExtracurricularAttendanceChart implements OnInit {
       },
       tooltip: {
         y: {
-          formatter: function(val: string) {
+          formatter: function (val: string) {
             return val;
           }
         }
@@ -78,7 +78,7 @@ export class ExtracurricularAttendanceChart implements OnInit {
         position: "top",
         horizontalAlign: "left",
         offsetX: 40
-      }
+      },
     };
   }
 
@@ -92,6 +92,7 @@ export class ExtracurricularAttendanceChart implements OnInit {
   ngOnInit() {
     this.initForm();
   }
+
   initForm() {
     this.paramForm = new FormGroup({
       'academic_year': new FormControl(null),
@@ -102,7 +103,7 @@ export class ExtracurricularAttendanceChart implements OnInit {
   onChangeAcademicYear(item: any) {
     this.paramForm.controls['academic_year'].markAsTouched();
     this.paramForm.controls['academic_year'].setValue(item ? item.academic_year : null);
-      this.getFilteredExcul();
+    this.getFilteredExcul();
   }
 
   onChangeSchool(item: any) {
@@ -110,7 +111,7 @@ export class ExtracurricularAttendanceChart implements OnInit {
     this.paramForm.controls['school_id'].setValue(item ? item.school_id : null);
 
     this.selectedSchool = item ? item.school_id : null;
-      this.getFilteredExcul();
+    this.getFilteredExcul();
   }
 
   getFilteredExcul() {
@@ -144,16 +145,35 @@ export class ExtracurricularAttendanceChart implements OnInit {
                 this.chartOptions.chart = {
                   type: "bar",
                   stacked: true,
-                  height: this.dataExcul.length < 2 ? 250 : 60 * this.dataExcul.length
-                };
-
-                this.chartOptions.xaxis = {
-                  categories: schoolShortAddress,
-                      labels: {
-                    formatter: function(val: string) {
-                      return val;
+                  height: this.dataExcul.length < 2 ? 250 : 60 * this.dataExcul.length,
+                  events: {
+                    click: function (event: { offsetX: any; }, chartContext: {
+                      w: { globals: { gridWidth: any; }; };
+                    }) {
+                      const xPos = event.offsetX;
+                      const xAxisWidth = chartContext.w.globals.gridWidth;
+                      const categories = schoolShortAddress;
+                      const categoryIndex = Math.floor((xPos / xAxisWidth) * categories.length) - 1;
+                      if (categoryIndex >= 0 && categoryIndex <= categories.length) {
+                       
+                      }
                     }
                   }
+                }
+                // @ts-ignore
+                this.chartOptions.xaxis = {
+                  categories: schoolShortAddress,
+                  labels: {
+                    formatter: function (val: string) {
+                      return val;
+                    },
+                    events: {
+                      click: function (event: any, chartContext: any, config: { value: any; }) {
+                        const clickedCategory = config.value;
+                        console.log('Category clicked:', clickedCategory);
+                      }
+                    }
+                  },
                 };
                 this.loading = false;
                 this.cd.detectChanges();
@@ -167,6 +187,7 @@ export class ExtracurricularAttendanceChart implements OnInit {
               // this.toastr.error('[' + this.heading + '] Cannot access server endpoint!', 'Connection Error');
             });
   }
+
 }
 
 

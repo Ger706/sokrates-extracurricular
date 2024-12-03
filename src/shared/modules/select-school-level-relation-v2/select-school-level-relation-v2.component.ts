@@ -39,7 +39,7 @@ export class SelectSchoolLevelRelationV2Component implements OnInit, OnChanges {
   all = false;
 
   @Input()
-  task: string | null = null;
+  task: string | null = 'EXTRACURRICULAR_DASHBOARD_ADMIN';
 
   @Input()
   academic_year : string | null = null;
@@ -225,21 +225,24 @@ export class SelectSchoolLevelRelationV2Component implements OnInit, OnChanges {
 
   filterSchoolLevelRelations() {
     // assign school level relation of unique school_id && school_level_id && school_short_address
-    const helper: { [key: string]: YearLevelMapping } = {};
-    // @ts-ignore
+    const helper = {};
     this.schoolLevelRelationsFiltered = this.schoolLevelRelations
-      .reduce(function (r, o) {
-        const key = o.school_id + '-' + o.school_level_id + '-' + o.school_short_address;
-        if (!helper[key]) {
-          helper[key] = Object.assign({}, o);
+        .reduce(function (r, o) {
+          const key = o.school_id + '-' + o.school_level_id + '-' + o.school_short_address;
           // @ts-ignore
-          r.push(helper[key]);
-        } else {
-          helper[key].used += o['used'];
-          helper[key].instances += o['instances'];
-        }
-        return r;
-      }, []);
+          if (!helper[key]) {
+            // @ts-ignore
+            helper[key] = Object.assign({}, o);
+            // @ts-ignore
+            r.push(helper[key]);
+          } else {
+            // @ts-ignore
+            helper[key].used += o['used'];
+            // @ts-ignore
+            helper[key].instances += o['instances'];
+          }
+          return r;
+        }, []);
     if (this.addAllToList === true) {
       // @ts-ignore
       this.schoolLevelRelationsWithAll = this.schoolLevelRelationsFiltered;

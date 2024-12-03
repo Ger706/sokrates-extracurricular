@@ -1,7 +1,4 @@
-import {version} from '../../package.json';
-
 export const environment = {
-  appVersion: version,
   production: true,
   auth: {
     url: 'auth.api.pre.sokrates.xyz',

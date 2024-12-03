@@ -8,12 +8,6 @@ import {AcademicCalendarService} from "../../../../shared/services/academic-cale
 import {ApexChart, ApexNonAxisChartSeries, ApexResponsive, ChartComponent} from "ng-apexcharts";
 import {ChartOptions} from "../extracurricular-chart/extracurricular-attendance-chart/extracurricular-attendance-chart";
 
-interface gender {
- extracurricular_name: string;
- male_student: number;
- female_student: number;
-}
-
 export type DonutOptions = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -31,7 +25,7 @@ export class ExtracurricularInformationComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions !: Partial<ChartOptions> | any;
 
-  @ViewChild("chart") chartD: ChartComponent;
+  @ViewChild("chartD") chartD: ChartComponent;
   public donutOptions !: Partial<DonutOptions> | any;
 
   constructor(private exculService : ExtracurricularService,
@@ -67,6 +61,7 @@ export class ExtracurricularInformationComponent implements OnInit {
 
     this.donutOptions = {
       chart: {
+        width: "80%",
         type: "donut"
       },
       responsive: [
@@ -85,10 +80,11 @@ export class ExtracurricularInformationComponent implements OnInit {
     };
   }
 
-  genderData: gender | [];
+  genderData: [];
   paramForm: FormGroup;
   selectedSchoolLevel = null;
   hasData: boolean = false;
+  hasDataAttendance: boolean = false;
   task = null;
   dataExcul = [];
   loading = false;
@@ -112,8 +108,10 @@ export class ExtracurricularInformationComponent implements OnInit {
     this.paramForm.controls['excul_id'].markAsTouched();
     this.paramForm.controls['excul_id'].setValue(item ? item.excul_id : null);
 
-    this.getExtracurricularCurrentActivity();
-    this.getFilteredExcul();
+    if (item.excul_id) {
+      this.getExtracurricularGender();
+      this.getFilteredExcul();
+    }
 
   }
   onChangeSchoolLevelRelation(item: any) {
@@ -141,7 +139,7 @@ export class ExtracurricularInformationComponent implements OnInit {
           // this.toastr.error('[' + this.heading + '] Cannot access server endpoint!', 'Connection Error');
         });
   }
-  getExtracurricularCurrentActivity() {
+  getExtracurricularGender() {
     this.genderData = [];
     this.loading = true;
     this.hasData = false;
@@ -153,12 +151,13 @@ export class ExtracurricularInformationComponent implements OnInit {
               // @ts-ignore
               if (response['error'] === 0) {
                 // @ts-ignore
-                this.genderData = response['result']['data'].slice() as gender;
-                console.log(this.genderData);
-                this.hasData = this.genderData != null;
+                this.genderData = response['result']['data'].slice();
+                this.hasData = this.genderData.length > 0;
                 this.loading = false;
 
-
+                if (!this.hasData) {
+                  return;
+                }
                 this.chartOptions.series = [
                   {
                     name: "Male",
@@ -190,7 +189,7 @@ export class ExtracurricularInformationComponent implements OnInit {
             });
   }
   getFilteredExcul() {
-    this.hasData = false;
+    this.hasDataAttendance = false;
     this.loading = true;
     this.exculService.getAttendanceSummary({
       academic_year: this.currentAcademic ? this.currentAcademic.academic_year : null,
@@ -203,11 +202,13 @@ export class ExtracurricularInformationComponent implements OnInit {
               if (response['error'] === 0) {
                 // @ts-ignore
                 this.dataExcul = response['result'].slice();
-                this.hasData = this.dataExcul.length > 0;
-                const present = this.dataExcul.map((i: any) => i.total_present);
-                const absent = this.dataExcul.map((i: any) => i.total_absent);
-                this.chartOptions.series = [present, absent];
-                this.chartOptions.labels = ['Present','Absent'];
+                this.hasDataAttendance = this.dataExcul.length > 0;
+                if (!this.hasDataAttendance) {
+                  return;
+                }
+                // @ts-ignore
+                this.donutOptions.series = [this.dataExcul[0].total_present, this.dataExcul[0].total_absent];
+                this.donutOptions.labels = ['Present','Absent'];
                 this.loading = false;
                 this.cd.detectChanges();
               } else {

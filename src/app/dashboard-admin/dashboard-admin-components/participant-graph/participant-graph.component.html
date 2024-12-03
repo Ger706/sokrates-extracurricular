@@ -4,15 +4,14 @@
 
     <div class="max-width">
         <div class="form-group row">
-            <div class="col-md-3">
+            <div class="col-md-5">
                 <app-select-academic-year-only (academicYearChanged)="onChangeAcademicYear($event)">
                 </app-select-academic-year-only>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-5">
                 <app-select-school-level-relation-v2 (schoolLevelRelationChanged)="onChangeSchoolLevelRelation($event)"
                                                      [academic_year]="paramForm.get('academic_year')?.value"
                                                      [all]="false"
-                                                     [task]="task"
                                                      [isDisabled]="!paramForm.get('academic_year')?.value">
                 </app-select-school-level-relation-v2>
             </div>
