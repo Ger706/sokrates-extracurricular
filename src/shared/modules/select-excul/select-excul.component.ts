@@ -80,7 +80,6 @@ export class SelectExculComponent implements OnInit, OnChanges {
       this.exculChanged.emit(null);
       return;
     }
-    console.log(item);
     // @ts-ignore
     this.settings.setConfig('exculID', item.excul_id ? String(item.excul_id) : null);
     this.exculChanged.emit(item);
@@ -104,7 +103,7 @@ export class SelectExculComponent implements OnInit, OnChanges {
             const preselectedExcul = this.exculList.find(
                 (excul) => excul.excul_id === storedExculId
             );
-          console.log(storedExculId, preselectedExcul);
+
             if (preselectedExcul) {
               // @ts-ignore
               this.exculValue = preselectedExcul;
