@@ -173,9 +173,10 @@ export class ExtracurricularInformationComponent implements OnInit {
                   }
                 ]
                 this.chartOptions.chart = {
-                  type: "bar",
+                  type: 'bar',
+                  height: 125,
                   stacked: true,
-                  height: 125
+                  stackType: '100%'
                 };
                 this.cd.detectChanges();
               } else {

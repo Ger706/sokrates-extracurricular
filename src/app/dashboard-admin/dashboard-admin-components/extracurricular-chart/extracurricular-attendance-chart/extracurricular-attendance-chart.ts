@@ -88,6 +88,7 @@ export class ExtracurricularAttendanceChart implements OnInit {
   hasData: boolean = false;
   task = null;
   loading = false;
+  byLocation = false;
 
   ngOnInit() {
     this.initForm();
@@ -114,12 +115,13 @@ export class ExtracurricularAttendanceChart implements OnInit {
     this.getFilteredExcul();
   }
 
-  getFilteredExcul() {
+  getFilteredExcul(school_location_id: any = null) {
     this.hasData = false;
     this.loading = true;
     this.exculService.getAttendanceSummary({
       academic_year: this.paramForm.value.academic_year || null,
-      school_id: this.paramForm.value.school_id || null
+      school_id: this.paramForm.value.school_id || null,
+      school_location_id: school_location_id || null
     })
         .subscribe(
             (response: Extracurricular[]) => {
@@ -128,10 +130,18 @@ export class ExtracurricularAttendanceChart implements OnInit {
                 // @ts-ignore
                 this.dataExcul = response['result'].slice();
                 this.hasData = this.dataExcul.length > 0;
-                const schoolShortAddress = this.dataExcul.map((i: any) => i.school_short_address);
+                let schoolShortAddress = null;
+                let exculName = null;
+                if (!school_location_id) {
+                  this.byLocation = false;
+                  schoolShortAddress = this.dataExcul.map((i: any) => i.school_short_address);
+                } else {
+                  this.byLocation = true;
+                  exculName = this.dataExcul.map((i: any) => i.extracurricular_name);
+                }
                 const present = this.dataExcul.map((i: any) => i.total_present);
                 const absent = this.dataExcul.map((i: any) => i.total_absent);
-
+                const dataForSchoolLocation = this.dataExcul;
                 this.chartOptions.series = [
                   {
                     name: "Present",
@@ -145,36 +155,38 @@ export class ExtracurricularAttendanceChart implements OnInit {
                 this.chartOptions.chart = {
                   type: "bar",
                   stacked: true,
-                  height: this.dataExcul.length < 2 ? 250 : 60 * this.dataExcul.length,
+                  height: this.dataExcul.length <= 2 ? 250 : 60 * this.dataExcul.length,
                   events: {
-                    click: function (event: { offsetX: any; }, chartContext: {
-                      w: { globals: { gridWidth: any; }; };
-                    }) {
-                      const xPos = event.offsetX;
-                      const xAxisWidth = chartContext.w.globals.gridWidth;
-                      const categories = schoolShortAddress;
-                      const categoryIndex = Math.floor((xPos / xAxisWidth) * categories.length) - 1;
-                      if (categoryIndex >= 0 && categoryIndex <= categories.length) {
-                       
+                    dataPointSelection: (event: any, chartContext: any, config: any) => {
+                      // @ts-ignore
+                      const schoolLocation = dataForSchoolLocation[config.dataPointIndex].school_location_id;
+                      if (!school_location_id) {
+                        this.getFilteredExcul(schoolLocation);
                       }
                     }
                   }
                 }
                 // @ts-ignore
-                this.chartOptions.xaxis = {
-                  categories: schoolShortAddress,
-                  labels: {
-                    formatter: function (val: string) {
-                      return val;
+                if (!school_location_id) {
+                  this.chartOptions.xaxis = {
+                    categories: schoolShortAddress,
+                    labels: {
+                      formatter: function (val: string) {
+                        return val;
+                      },
                     },
-                    events: {
-                      click: function (event: any, chartContext: any, config: { value: any; }) {
-                        const clickedCategory = config.value;
-                        console.log('Category clicked:', clickedCategory);
-                      }
-                    }
-                  },
-                };
+                  };
+                } else {
+                  this.chartOptions.xaxis = {
+                    categories: exculName,
+                    labels: {
+                      formatter: function (val: string) {
+                        return val;
+                      },
+                    },
+                  };
+                }
+
                 this.loading = false;
                 this.cd.detectChanges();
               } else {

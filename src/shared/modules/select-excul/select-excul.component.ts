@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angula
 import { ToastrService } from 'ngx-toastr';
 import {Extracurricular} from "../../models/extracurricular.model";
 import {ExtracurricularService} from "../../services/extracurricular.service";
+import {SettingService} from "../../services/setting.service";
 
 @Component({
   selector: 'app-select-excul',
@@ -41,7 +42,8 @@ export class SelectExculComponent implements OnInit, OnChanges {
 
   constructor(
     private exculService: ExtracurricularService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private settings: SettingService
   ) {
   }
 
@@ -78,8 +80,10 @@ export class SelectExculComponent implements OnInit, OnChanges {
       this.exculChanged.emit(null);
       return;
     }
-
-    this.exculChanged.emit(this.exculValue);
+    console.log(item);
+    // @ts-ignore
+    this.settings.setConfig('exculID', item.excul_id ? String(item.excul_id) : null);
+    this.exculChanged.emit(item);
   }
 
   getExtracurriculars() {
@@ -92,9 +96,21 @@ export class SelectExculComponent implements OnInit, OnChanges {
       .subscribe((response: Extracurricular[]) => {
         // @ts-ignore
         if (response['error'] === 0) {
-          console.warn(response);
           // @ts-ignore
           this.exculList = response['result'].slice();
+          const storedExculId = Number(this.settings.getConfig('exculID'));
+
+          if (storedExculId) {
+            const preselectedExcul = this.exculList.find(
+                (excul) => excul.excul_id === storedExculId
+            );
+          console.log(storedExculId, preselectedExcul);
+            if (preselectedExcul) {
+              // @ts-ignore
+              this.exculValue = preselectedExcul;
+              this.exculChanged.emit(preselectedExcul);
+            }
+          }
         } else {
           // @ts-ignore
           this.toastr.error('[' + this.heading + '] ' + response['message'], 'Invalid Response');

@@ -22,6 +22,9 @@
             <mat-spinner></mat-spinner>
         </div>
         <div id="chart" style="margin-top: 30px" *ngIf="hasData && !loading">
+            <div *ngIf="byLocation">
+                <mat-icon (click)="getFilteredExcul()">arrow_back</mat-icon>
+            </div>
             <apx-chart
                     [series]="chartOptions.series"
                     [chart]="chartOptions.chart"
