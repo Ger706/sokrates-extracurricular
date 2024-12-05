@@ -26,6 +26,9 @@ export class AuthService {
   private hasLoadedPermission = false;
   private auth: Auth | null | undefined;
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public service = 'auth-http';
+  public urlAuthV2 = '/v2';
+
 
   constructor(private http: HttpClient,
               private router: Router,
@@ -214,7 +217,7 @@ export class AuthService {
       this.settings.setConfig('client.isInternalCandidate', this.auth.isInternalCandidate);
       this.settings.setConfig('client.survey_id', this.auth.survey_id);
 
-      this.router.navigate(['/client/layout/dashboard']);
+      this.router.navigate(['/layout/home']);
     }
 
     this.auth = null;
@@ -440,5 +443,14 @@ export class AuthService {
     } catch (e) {
     }
     return roleIds;
+  }
+  getCaptcha() {
+    const requestUrl = this.settings.getConfig('system.url') + '/captcha/api';
+    return this.http.get<any>(requestUrl, this.settings.httpOptionWithToken());
+  }
+
+  captcha() {
+    const url = this.settings.getConfig('api.url') + `/${this.service}${this.urlAuthV2}/captcha`;
+    return this.http.get<any>(url);
   }
 }

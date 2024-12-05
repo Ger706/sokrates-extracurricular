@@ -1,0 +1,161 @@
+.field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -25px;
+  position: relative;
+  z-index: 2;
+}
+
+.container {
+  width: 100%;
+  max-width: none;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background: #f2f2f2;
+}
+
+.wrapper {
+  width: 390px;
+  background: #fff;
+  color: #666;
+  border-radius: 10px;
+  overflow: hidden;
+  /* padding: 77px 30px 33px; */
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .1);
+  -moz-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .1);
+  -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .1);
+  -o-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .1);
+  -ms-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .1);
+}
+
+.title {
+  display: block;
+  font-size: 2em;
+  color: #333;
+  font-weight: bold;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.logo img {
+  max-width: 50%;
+}
+.logo {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-sso {
+  border-radius: 0;
+  font-weight: bolder;
+  font-size: 1rem;
+  letter-spacing: 0;
+  width: 100%;
+}
+
+.btn-sso:hover {
+  border-color: #3498db;
+  color: #3498db;
+  cursor: pointer;
+}
+
+.btn-facebook {
+  border: 1px solid #e6e6e6;
+  color: rgb(59, 89, 152);;
+}
+
+.btn-facebook i {
+  font-size: 20px;
+  margin-right: 10px;
+  padding-bottom: 1px;
+}
+
+.btn-github {
+  border: 1px solid #e6e6e6;
+  color: black;
+}
+
+.btn-github i {
+  font-size: 20px;
+  margin-right: 15px;
+  padding-bottom: 1px;
+}
+
+.btn-google {
+  border: 1px solid #e6e6e6;
+  color: #333333;
+}
+
+.btn-google img {
+  width: 19px;
+  margin-right: 10px;
+  padding-bottom: 1px;
+}
+
+/* flip card */
+.wrapper {
+  -webkit-transition: -webkit-transform 1s;
+  -moz-transition: -moz-transform 1s;
+  -o-transition: -o-transform 1s;
+  transition: transform 1s;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+}
+
+.wrapper .front {
+  padding: 25px 30px 30px;
+}
+
+.wrapper .back {
+  padding: 25px 30px 30px;
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.wrapper .front a {
+  text-decoration: none;
+}
+
+.wrapper .front .logo img {
+  max-width: 150px;
+}
+
+.wrapper .back a {
+  text-decoration: none;
+}
+
+.wrapper .back .logo img {
+  max-width: 150px;
+}
+
+.wrapper.flipped {
+  width: 700px !important;
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.instructions h5 {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.instructions h6 {
+  font-size: 0.85rem;
+}

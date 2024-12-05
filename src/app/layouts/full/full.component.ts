@@ -30,12 +30,12 @@ export class FullComponent {
 
   sidebarMenu: sidebarMenu[] = [
     {
-      link: "/home",
+      link: "/layout/home",
       icon: "home",
       menu: "Dashboard",
     },
     {
-      link: "/button",
+      link: "/layout/button",
       icon: "disc",
       menu: "Buttons",
     },

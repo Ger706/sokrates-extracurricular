@@ -1,0 +1,96 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" [formGroup]="loginForm">
+    <div class="login-align">
+        <div class="login__field">
+            <div class="login__icon">
+                <fa-icon [icon]="faUser"></fa-icon>
+            </div>
+            <input type="text" class="login__input" formControlName="username" placeholder="Username / Email" [ngClass]="{'is-invalid': !loginForm.get('username')?.valid && loginForm.get('username')?.touched}">
+        </div>
+        <div class="login__field">
+            <div class="login__icon">
+                <fa-icon [icon]="faLock"></fa-icon>
+            </div>
+
+            <input [type]="passwordType" class="login__input" formControlName="password" placeholder="Password">
+            <span class="mr-2 field-icon" style="cursor: pointer" (click)="onHideOrShowPassword()">
+                <div class="login__icon2">
+                    <fa-icon *ngIf="passwordType === 'password'"aria-hidden="true" [icon]="faEye"></fa-icon>
+                <fa-icon *ngIf="passwordType === 'text'" aria-hidden="true" [icon]="faEyeSlash"></fa-icon>
+                </div>
+
+        </span>
+        </div>
+    </div>
+
+
+    <div class="form-group login__field">
+        <div class="captcha-flex">
+            <div class="mr-auto" *ngIf="!captchaLoading">
+                <ng-container *ngIf="captchaNew.svg">
+                    <div class="captcha" [innerHTML]="captchaNew.svg"></div>
+                </ng-container>
+            </div>
+
+            <input [ngClass]="!loginForm.get('captcha')?.valid ? 'is-invalid' : ''" autofocus class="form-control captcha__input"
+                   formControlName="captcha" id="captcha" placeholder="Captcha Code"
+                   type="text">
+
+            <div class="mt-1 mb-3 d-flex flex-row justify-content-center align-items-center">
+                <div [ngClass]="captchaLoading ? 'mx-auto' : 'ml-auto'">
+                    <fa-icon [icon]="faRefresh" (click)="captchaRefresh()">
+                    </fa-icon>
+                </div>
+            </div>
+        </div>
+        <ng-container *ngIf="!loginForm.get('captcha')?.valid && this.loginForm.get('captcha')?.touched">
+            <div *ngIf="loginForm.get('captcha')?.errors?.['required']" class="invalid-feedback"  style="text-align: center">Captcha is
+                required
+            </div>
+        </ng-container>
+    </div>
+
+    <div>
+        <button [disabled]="!loginForm.valid || loading"
+                class="button-sokrates button-login"
+                type="submit">
+            <ng-container *ngIf="loading"><i class='fa fa-fw fa-spinner fa-spin'></i></ng-container>&nbsp;Login
+        </button>
+        <div *ngIf="errorMsg !== null" class="invalid-feedback d-block text-center">{{ errorMsg }}</div>
+    </div>
+    <div class="text-center">
+        <a [href]="forgotPasswordLink" class="small" target="_blank">I forgot my password</a>
+    </div>
+</form>
+
+<ng-template #templateVerifyMFA let-modal let-close="close">
+    <form (ngSubmit)="onVerifySecret()">
+        <div class="modal-header">
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="modal-title">Enter Your {{ this.mfa }}</h5>
+                </div>
+            </div>
+        </div>
+
+        <ng-container>
+            <div class="modal-body">
+                <div class="row my-5">
+                    <div class="col-md-12 form-group d-flex justify-content-center">
+                        <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="{length:6, isPasswordInput: true, disableAutoFocus: false}">
+                        </ng-otp-input>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <div class="modal-footer">
+            <button [disabled]="!token || token.length !== 6 || loadingMfa"
+                    type="submit"
+                    class="btn btn-success button-sokrates">
+
+                <ng-container *ngIf="loadingMfa"><i class='fa fa-fw fa-spinner fa-spin'></i></ng-container>&nbsp;Login
+            </button>
+            <!--    <button (click)="onVerifySecret()" class="btn button-sokrates btn-green" type="button">LOGIN</button>-->
+        </div>
+    </form>
+</ng-template>

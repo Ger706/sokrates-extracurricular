@@ -19,13 +19,16 @@ import { ProductComponent } from './dashboard-admin/dashboard-admin-components/p
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 import { FullComponent } from './layouts/full/full.component';
 import {UnauthenticatedGuard} from "../shared/guard/unauthenticated.guard";
+import {BlankComponent} from "./layouts/blank/blank.component";
+import {LoginComponent} from "./authentication/side-login/login.component";
+import {AuthComponent} from "./authentication/auth.component";
 
 const routes: Routes = [
   {
-    path:"",
+    path:"layout",
     component:FullComponent,
     children: [
-      {path:"", redirectTo:"/home", pathMatch:"full"},
+      {path:"", redirectTo:"home", pathMatch:"full"},
       {path:"home", component:DashboardAdminComponent},
       {path:"alerts", component:AlertsComponent},
       {path:"forms", component:FormsComponent},
@@ -45,9 +48,18 @@ const routes: Routes = [
       {path:"button", component:ButtonsComponent},
     ]
   },
-
-  {path:"", redirectTo:"/home", pathMatch:"full"},
-  {path:"**", redirectTo:"/home", pathMatch:"full"},
+  {
+    path: '',
+    component: BlankComponent,
+    children: [
+      {path:"", redirectTo:"login", pathMatch:"full"},
+      {path:"login", component:AuthComponent},
+    ],
+  },
+  {
+    path: '**',
+    redirectTo: 'authentication/error',
+  },
 ];
 
 // children: [

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FeatherModule } from 'angular-feather';
 import { allIcons } from 'angular-feather/icons';
-import { FormsModule } from '@angular/forms'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,11 +21,22 @@ import {AuthService} from "../shared/services/auth.service";
 import {TranslateService} from "../shared/services/translate.service";
 import {DashboardAdminModule} from "./dashboard-admin/dashboard-admin.module";
 import {SchoolAndLocationService} from "../shared/services/school-and-location.service";
+import {LoginComponent} from "./authentication/side-login/login.component";
+import {NgOtpInputComponent} from "ng-otp-input";
+import {UserService} from "../shared/services/user.service";
+import {WebsiteService} from "../shared/services/website.service";
+import {WINDOW} from "../shared/providers/window.provider";
+import {Auth} from "../shared/models/auth.model";
+import {AuthComponent} from "./authentication/auth.component";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {FontAwesomeTestingModule} from "@fortawesome/angular-fontawesome/testing";
 
 @NgModule({
   declarations: [
     AppComponent,
-    FullComponent
+    FullComponent,
+      AuthComponent,
+      LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +48,10 @@ import {SchoolAndLocationService} from "../shared/services/school-and-location.s
     ComponentsModule,
     FormsModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ReactiveFormsModule,
+    NgOtpInputComponent,
+    FontAwesomeModule
   ],
   providers: [ ExtracurricularService,
     SettingService,
@@ -48,8 +62,10 @@ import {SchoolAndLocationService} from "../shared/services/school-and-location.s
     YearLevelMappingService,
     AuthService,
     TranslateService,
-    SchoolAndLocationService
-
+    SchoolAndLocationService,
+      UserService,
+      WebsiteService,
+    { provide: WINDOW, useValue: window }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CachedItem, NgForage, NgForageCache } from 'ngforage';
 import {Observable, pipe, throwError} from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
+import {CachedItem, NgForage, NgForageCache} from "ngforage";
 
 
 @Injectable()
