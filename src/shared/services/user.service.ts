@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import { User } from '../models/user.model';
 import { Observable } from 'rxjs';
@@ -128,5 +128,17 @@ export class UserService {
       headers: this.settings.httpOptionWithToken().headers,
       // params: $params
     });
+  }
+  getTimezone(token?: any) {
+    const requestUrl = this.settings.getConfig('client.url') + '/customer/dashboard/teacher/academic-year';
+    if (token) {
+      return this.http.post<any>(requestUrl, {}, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        })
+      });
+    } else {
+      return this.http.post<any>(requestUrl, {}, this.settings.httpOptionWithToken());
+    }
   }
 }

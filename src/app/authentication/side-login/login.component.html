@@ -1,4 +1,5 @@
 <form #f="ngForm" (ngSubmit)="onSubmit(f)" [formGroup]="loginForm">
+    <h3 class="login-text">Welcome</h3>
     <div class="login-align">
         <div class="login__field">
             <div class="login__icon">
@@ -58,7 +59,7 @@
         <div *ngIf="errorMsg !== null" class="invalid-feedback d-block text-center">{{ errorMsg }}</div>
     </div>
     <div class="text-center">
-        <a [href]="forgotPasswordLink" class="small" target="_blank">I forgot my password</a>
+        <a class="forgot-password small" [href]="forgotPasswordLink" target="_blank">I forgot my password</a>
     </div>
 </form>
 

@@ -132,9 +132,6 @@ export class SettingService {
     }
 
     getConfig(key: string) {
-        if (key == 'client.url') {
-            return 'https://kalam-kudus.api.sokrates.xyz:4430'
-        }
         return localStorage.getItem(key);
     }
 
@@ -149,9 +146,15 @@ export class SettingService {
     }
 
     getToken() {
-        const clientoken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2thbGFtLWt1ZHVzLmFwaS5zb2tyYXRlcy54eXo6NDQzMCIsImlhdCI6MTczMjc2ODYxMywiZXhwIjoxNzMzOTg1NDEzLCJuYmYiOjE3MzI3Njg2MTMsImp0aSI6ImY1MDRmODJhNjZkOTRlZTE5MzNiMWJhOGY0YTMzNjdmIiwic3ViIjoxLCJwcnYiOiJkZDM4MTJhMWQwNDE2NWRhODBiNmNiMGY2MWUxZDc4NzgyZGJkYzM2IiwidXVpZCI6IjFiOTBiYTBjLTExMzAtNDU0Ni05Mjg4LTlhNDQ4NmNmMDdiZSIsInRlbmFudF91dWlkIjoiMWI5MGJhMGMtMTEzMC00NTQ2LTkyODgtOWE0NDg2Y2YwN2JlIiwidXNlcl91dWlkIjoiMmRiNDgwYjMtNTQ1OC00MmYwLThhMmUtODc3YzM3Yjg4OTIzIn0.syN7yOJtelw5j4c7x9L28aMpEYJCL9AjP-tuiCFNX-k'
-        return clientoken;
-        // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2thbGFtLWt1ZHVzLmFwaS5zb2tyYXRlcy54eXo6NDQzMCIsImlhdCI6MTczMjc3NDk4NiwiZXhwIjoyNzMyNzgyMTg2LCJuYmYiOjE3MzI3NzQ5ODYsImp0aSI6IjI3ZmJiYzczNDE2OTQ2NTk4MGJlNzQzNGNkYWJjODZiIiwic3ViIjoxLCJwcnYiOiJkZDM4MTJhMWQwNDE2NWRhODBiNmNiMGY2MWUxZDc4NzgyZGJkYzM2IiwidXVpZCI6IjFiOTBiYTBjLTExMzAtNDU0Ni05Mjg4LTlhNDQ4NmNmMDdiZSIsInRlbmFudF91dWlkIjoiMWI5MGJhMGMtMTEzMC00NTQ2LTkyODgtOWE0NDg2Y2YwN2JlIiwidXNlcl91dWlkIjoiMmRiNDgwYjMtNTQ1OC00MmYwLThhMmUtODc3YzM3Yjg4OTIzIn0.IY24zmnrmbK6k2Lm3nJNnREhYus87bK54oLVJ4A0keM
+        return this.getConfig('client.token');
+    }
+
+    setSession(sessionId: string) {
+        localStorage.setItem('session_id', sessionId);
+    }
+
+    getSessionId() {
+        return localStorage.getItem('session_id');
     }
 
     resetAll() {
@@ -177,7 +180,8 @@ export class SettingService {
         return {
             headers: new HttpHeaders({
                 // 'Content-Type':  'application/json',
-                'Authorization': 'Bearer ' + this.getToken()
+                'Authorization': 'Bearer ' + this.getToken(),
+                'session': this.getSessionId() || '1'
             }),
             params: param,
         };

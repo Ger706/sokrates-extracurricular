@@ -1,4 +1,4 @@
-<mat-card style="min-height:400px">
+<mat-card style="min-height:420px; max-height: 420px">
     <mat-card-content>
         <h4 class="mb-32">Extracurricular Category Chart</h4>
 
@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="!hasData && !loading"  class="d-flex justify-content-center align-items-center mt-5 mb-5" style="height:30vh">
+        <div *ngIf="!hasData && !loading"  class="d-flex justify-content-center align-items-center mt-4 mb-5" style="height:30vh">
             <h3> No Data Available Yet</h3>
         </div>
         <div *ngIf="!hasData && loading" class="d-flex justify-content-center align-items-center mb-5" style="margin-top: 50px">

@@ -177,6 +177,10 @@ export class LoginComponent implements OnInit {
                       // @ts-ignore
                       this.authService.loginSelect(res2.result.data);
                       // @ts-ignore
+                      console.log(res2.result.data);
+                      // @ts-ignore
+                      this.settings.setSession(res2.result.data['session_id']);
+                      // @ts-ignore
                       this.authService.setPermissions(res2.result.data, true, true);
                     }
                   } else {
@@ -227,6 +231,7 @@ export class LoginComponent implements OnInit {
         (response: any) => {
           if (response.status) {
             this.authService.loginSelect(response.result.data);
+            this.settings.setSession(response.result.data['session_id']);
             this.authService.setPermissions(response.result.data, true, true);
             this.modalService.dismissAll();
           } else {

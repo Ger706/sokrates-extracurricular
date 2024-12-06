@@ -391,7 +391,17 @@ export class AuthService {
 
     return this.http.post<Auth>(url, param, this.settings.httpOptionWithToken());
   }
+  renewDeleteSession(param: any) {
+    const url = this.settings.getConfig('api.url') + '/auth-http/v2/session/renew-delete';
 
+    return this.http.post<Auth>(url, param, this.settings.httpOptionWithToken());
+  }
+  kilAllSession(param: any) {
+    const url = this.settings.getConfig('api.url') + '/auth-http/v2/session/kill-all-session';
+    // const url = 'http://localhost:3009/auth-http/v2/session/kill-all-session';
+
+    return this.http.post<Auth>(url, param, this.settings.httpOptionWithToken());
+  }
   socialDetail() {
     const url = this.settings.getConfig('client.url') + '/customer/auth/social/detail';
 

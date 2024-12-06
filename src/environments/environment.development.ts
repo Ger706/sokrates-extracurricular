@@ -1,12 +1,10 @@
-import {version} from '../../package.json';
-
 export const environment = {
-  appVersion: version,
+
   production: false,
   next: 'https://next.sokrates.xyz',
   local: false,
   auth: {
-    url: 'auth.api.sokrates.xyz',
+    url: 'auth.api.sokrates.xyz:4430',
     secure: true
   },
   upload: {

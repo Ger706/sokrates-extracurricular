@@ -1,13 +1,19 @@
-<div style="width: 100%; margin: 0 auto;">
+<div style="width: 100%; margin: 0 auto;" class="d-flex">
   <div class="container">
-    <div class="wrapper p-3">
-      <article>
-        <!--        <span class="title mb-2">Welcome</span>-->
-        <div class="logo mb-3 d-flex flex-column justify-content-center align-items-center">
+      <div class="wrapper p-3 display-layout" style="width: 40%; height:80%; border-radius: 0px"><div class="logo mb-3 d-flex flex-column justify-content-center align-items-center">
           <img alt="Sokrates Admin" class="d-inline-block"
                src="https://files.sokrates.co.id/pri/image/tenant/logo/9b00f263-7bae-4643-ac77-9bff22183e0d.png">
-        </div>
-
+          <img alt="Sokrates Admin" class="d-inline-block"
+               src="assets/images/excul5.jpg">
+      </div>
+      </div>
+    <div class="wrapper p-3" style="border-radius: 0px; height: 80%">
+      <article>
+        <!--        <span class="title mb-2">Welcome</span>-->
+          <div class="logo mb-3 flex-column justify-content-center align-items-center display-logo">
+              <img alt="Sokrates Admin" class="display-logo"
+               src="https://files.sokrates.co.id/pri/image/tenant/logo/9b00f263-7bae-4643-ac77-9bff22183e0d.png">
+          </div>
         <div class="pt-2">
           <div *ngIf="loading" class="text-center">
             <i class="fa fa-spin fa-spinner fa-2x"></i>
@@ -23,8 +29,8 @@
           </div>
         </div>
 
-        <div class=" logo pt-5 text-muted text-center border-top-0">
-          <small>Powered by <b><a href="https://sokrates.id" target="_blank">Sokrates</a></b></small>
+        <div class=" logo pt-1 text-muted text-center border-top-0">
+          <small>Powered by <b><a style="text-decoration:none;" href="https://sokrates.id" target="_blank">Sokrates</a></b></small>
           <br>
           <small>
 <!--            <a href="https://changelog.sokrates.co.id" target="_blank">v{{ currentApplicationVersion }}</a>-->

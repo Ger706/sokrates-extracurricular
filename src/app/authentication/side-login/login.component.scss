@@ -216,8 +216,30 @@ body {
   border-bottom-color: #6A679E;
 }
 .button-login {
+  margin-top: 25px;
   width: 50%;
-  height: 25px;
+  height: 40px;
   border-radius: 6px;
   margin-bottom: 10px;
+}
+.login-text {
+  font-weight: 800;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.forgot-password {
+  text-decoration: none;
+  color:black;
+}
+.forgot-password:focus,
+.forgot-password:hover,
+.forgot-password:active {
+  color: black;
+  outline: none;
+}
+
+@media (max-width: 768px) {
+ .login-text {
+   display: none;
+ }
 }

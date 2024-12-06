@@ -25,7 +25,9 @@
           </div>
       </div>
 
-      <p class="fw-bold fs-15 d-flex justify-content-center align-items-center mb-5" style="margin-top: 100px" *ngIf="!hasData && !loading"> No Data</p>
+      <div *ngIf="!hasData && !loading"  class="d-flex justify-content-center align-items-center mt-5 mb-5" style="height:30vh">
+          <h3> No Data Available Yet</h3>
+      </div>
       <div *ngIf="!hasData && loading" class="d-flex justify-content-center align-items-center mb-5" style="margin-top: 125px">
           <mat-spinner></mat-spinner>
       </div>

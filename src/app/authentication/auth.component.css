@@ -159,3 +159,17 @@
 .instructions h6 {
   font-size: 0.85rem;
 }
+.display-layout {
+  display: block;
+}
+.display-logo {
+  display: none;
+}
+@media (max-width: 768px) {
+  .display-layout {
+    display: none;
+  }
+  .display-logo {
+    display: flex;
+  }
+}
