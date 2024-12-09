@@ -52,9 +52,9 @@ export class FullComponent implements OnInit {
       menu: "Dashboard",
     },
     {
-      link: "/layout/button",
+      link: "/layout/school-activities",
       icon: "disc",
-      menu: "Buttons",
+      menu: "School Activities",
     },
     {
       link: "/forms",

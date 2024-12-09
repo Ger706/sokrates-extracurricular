@@ -1,20 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AlertsComponent } from './components/alerts/alerts.component';
-import { ButtonsComponent } from './components/buttons/buttons.component';
-import { ChipsComponent } from './components/chips/chips.component';
-import { ExpansionComponent } from './components/expansion/expansion.component';
-import { FormsComponent } from './components/forms/forms.component';
-import { GridListComponent } from './components/grid-list/grid-list.component';
-import { MenuComponent } from './components/menu/menu.component';
-import { ProgressSnipperComponent } from './components/progress-snipper/progress-snipper.component';
-import { ProgressComponent } from './components/progress/progress.component';
-import { SlideToggleComponent } from './components/slide-toggle/slide-toggle.component';
-import { SliderComponent } from './components/slider/slider.component';
-import { SnackbarComponent } from './components/snackbar/snackbar.component';
-import { TabsComponent } from './components/tabs/tabs.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { TooltipsComponent } from './components/tooltips/tooltips.component';
+import { AlertsComponent } from './pages/alerts/alerts.component';
+import { ChipsComponent } from './pages/chips/chips.component';
+import { ExpansionComponent } from './pages/expansion/expansion.component';
+import { FormsComponent } from './pages/forms/forms.component';
+import { GridListComponent } from './pages/grid-list/grid-list.component';
+import { MenuComponent } from './pages/menu/menu.component';
+import { ProgressSnipperComponent } from './pages/progress-snipper/progress-snipper.component';
+import { ProgressComponent } from './pages/progress/progress.component';
+import { SlideToggleComponent } from './pages/slide-toggle/slide-toggle.component';
+import { SliderComponent } from './pages/slider/slider.component';
+import { SnackbarComponent } from './pages/snackbar/snackbar.component';
+import { TabsComponent } from './pages/tabs/tabs.component';
+import { ToolbarComponent } from './pages/toolbar/toolbar.component';
+import { TooltipsComponent } from './pages/tooltips/tooltips.component';
 import { ProductComponent } from './dashboard-admin/dashboard-admin-components/product/product.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 import { FullComponent } from './layouts/full/full.component';
@@ -22,6 +21,7 @@ import {UnauthenticatedGuard} from "../shared/guard/unauthenticated.guard";
 import {BlankComponent} from "./layouts/blank/blank.component";
 import {LoginComponent} from "./authentication/side-login/login.component";
 import {AuthComponent} from "./authentication/auth.component";
+import {SchoolActivitiesComponent} from "./pages/school-activities/school-activities.component";
 
 const routes: Routes = [
   {
@@ -45,7 +45,7 @@ const routes: Routes = [
       {path:"slider", component:SliderComponent},
       {path:"slide-toggle", component:SlideToggleComponent},
       {path:"tooltip", component:TooltipsComponent},
-      {path:"button", component:ButtonsComponent},
+      {path:"school-activities", component:SchoolActivitiesComponent},
     ]
   },
   {

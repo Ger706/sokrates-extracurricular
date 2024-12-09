@@ -104,7 +104,7 @@ export class SelectSchoolLevelRelationV2Component implements OnInit, OnChanges {
     if (this.location === true) {
       this.text = true;
     }
-    this.translate.load('main', 'extracurricular/excul-participant');
+    this.translate.load('main', 'extracurricular');
   }
 
   async getUserAccess() {

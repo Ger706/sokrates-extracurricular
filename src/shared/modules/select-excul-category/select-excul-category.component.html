@@ -1,0 +1,12 @@
+<ng-select (change)="onChange($event)"
+           [(ngModel)]="exculValue"
+           [disabled]="isDisabled"
+           [items]="dataCategory"
+           [loading]="loading"
+           bindLabel="category_name"
+           [placeholder]= "exculValue ? '' : ((all ? 'ALL' : 'SELECT') | translate) + ' ' + ('CATEGORY' | translate)"
+           class="selector-style">
+  <ng-template ng-option-tmp let-item="item">
+    <div class="custom-option-style"  title="{{item.category_name}}">{{item.category_name}}</div>
+  </ng-template>
+</ng-select>

@@ -32,7 +32,7 @@ export class ExtracurricularInformationComponent implements OnInit {
               private translate: TranslateService,
               private cd: ChangeDetectorRef,
               private academicService: AcademicCalendarService) {
-    translate.load('main', 'extracurricular/excul-participant');
+    translate.load('main', 'extracurricular');
 
     this.chartOptions = {
       plotOptions: {

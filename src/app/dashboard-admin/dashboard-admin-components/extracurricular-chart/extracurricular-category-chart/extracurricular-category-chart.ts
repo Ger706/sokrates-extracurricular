@@ -40,7 +40,7 @@ export class ExtracurricularCategorychart implements OnInit {
       private translate: TranslateService,
       private cd: ChangeDetectorRef
   ) {
-    translate.load("main", "extracurricular/excul-participant");
+    translate.load("main", "extracurricular");
 
     this.chartOptions = {
       chart: {

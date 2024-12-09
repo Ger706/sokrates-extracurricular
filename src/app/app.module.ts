@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FullComponent } from './layouts/full/full.component';
 import { DemoFlexyModule } from './demo-flexy-module'
-import { ComponentsModule } from './components/components.module';
+import { ComponentsModule } from './pages/components.module';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { ExtracurricularService } from "../shared/services/extracurricular.service";
 import { SettingService } from "../shared/services/setting.service";
@@ -30,6 +30,7 @@ import {Auth} from "../shared/models/auth.model";
 import {AuthComponent} from "./authentication/auth.component";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {FontAwesomeTestingModule} from "@fortawesome/angular-fontawesome/testing";
+import {ExtracurricularCategoryService} from "../shared/services/extracurricular-category.service";
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import {FontAwesomeTestingModule} from "@fortawesome/angular-fontawesome/testing
     SchoolAndLocationService,
       UserService,
       WebsiteService,
+      ExtracurricularCategoryService,
     { provide: WINDOW, useValue: window }
   ],
   bootstrap: [AppComponent]

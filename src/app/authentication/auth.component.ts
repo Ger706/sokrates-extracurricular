@@ -6,6 +6,7 @@ import {WebsiteService} from '../../shared/services/website.service';
 import { UserService } from '../../shared/services/user.service';
 import {environment} from "../../environments/environment";
 import {LocalStorageService} from "../../shared/services/localstorage.service";
+import {Auth} from "../../shared/models/auth.model";
 
 @Component({
   selector: 'app-auth',
@@ -32,6 +33,22 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
     this.initToken(this.route.snapshot.queryParams['token']);
+
+    const data = {
+      session_id: this.settingService.getSessionId(),
+      action: 'renew'
+    };
+    this.authService.renewDeleteSession(data).subscribe(
+        (response: Auth) => {
+          // @ts-ignore
+          if (response['error'] === 0) {
+            window.location.href = '/layout/home'
+          }
+        },
+        error => {
+
+        }
+    );
   }
 
   initToken(token: string): void {

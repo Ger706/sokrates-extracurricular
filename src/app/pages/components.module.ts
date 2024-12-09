@@ -17,8 +17,17 @@ import { ProgressSnipperComponent } from './progress-snipper/progress-snipper.co
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { SliderComponent } from './slider/slider.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
-import { ButtonsComponent } from './buttons/buttons.component';
 import { TooltipsComponent } from './tooltips/tooltips.component'
+import {SchoolActivitiesComponent} from "./school-activities/school-activities.component";
+import {SelectExculModule} from "../../shared/modules/select-excul/select-excul.module";
+import {SelectExculCategoryModule} from "../../shared/modules/select-excul-category/select-excul-category.module";
+import {SelectExculCategoryComponent} from "../../shared/modules/select-excul-category/select-excul-category.component";
+import {SelectExculComponent} from "../../shared/modules/select-excul/select-excul.component";
+import {NgSelectModule} from "@ng-select/ng-select";
+import {
+  SchoolActivitiesTableComponent
+} from "./school-activities/school-activities-table/school-activities-table.component";
+import {SchoolActivitiesTableModule} from "./school-activities/school-activities-table/school-activities-table.module";
 
 
 @NgModule({
@@ -26,7 +35,7 @@ import { TooltipsComponent } from './tooltips/tooltips.component'
     CommonModule,
     FeatherModule.pick(allIcons),
     DemoFlexyModule,
-    ButtonsComponent,
+    SchoolActivitiesComponent,
     SlideToggleComponent,
     SliderComponent,
     ToolbarComponent,
@@ -41,7 +50,11 @@ import { TooltipsComponent } from './tooltips/tooltips.component'
     AlertsComponent,
     GridListComponent,
     TooltipsComponent,
-    FormsModule
+    FormsModule,
+      NgSelectModule,
+    SelectExculCategoryModule,
+    SelectExculModule,
+      SchoolActivitiesTableModule
   ],
   exports: [
     AlertsComponent,
@@ -57,7 +70,7 @@ import { TooltipsComponent } from './tooltips/tooltips.component'
     SnackbarComponent,
     SliderComponent,
     SlideToggleComponent,
-    ButtonsComponent,
+    SchoolActivitiesComponent
   ]
 })
 export class ComponentsModule { }

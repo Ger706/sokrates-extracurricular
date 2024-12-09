@@ -572,3 +572,28 @@ tag-input-form {
 .fullModalClass .modal-dialog {
   max-width: 100%;
 }
+.gradient-button {
+  background-color: #36A9AE;
+  background-image: linear-gradient(#37ADB2, #329CA0);
+  border: 1px solid #2A8387;
+  border-radius: 4px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: block;
+  font-size: 12px;
+  line-height: 100%;
+  margin: 0;
+  outline: 0;
+  padding: 11px 15px;
+  text-align: center;
+  transition: box-shadow .05s ease-in-out,opacity .05s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+  max-width: 145px;
+}
+.button-25:disabled {
+  cursor: not-allowed;
+  opacity: .6;
+}

@@ -45,7 +45,7 @@ export class ParticipantGraphComponent implements OnInit{
 
   constructor(private exculService : ExtracurricularService, private translate: TranslateService, private cd: ChangeDetectorRef) {
 
-    translate.load('main', 'extracurricular/excul-participant');
+    translate.load('main', 'extracurricular');
     // active users
     this.exculParticipant = {
 
