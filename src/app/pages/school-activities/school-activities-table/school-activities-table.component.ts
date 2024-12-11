@@ -1,15 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {faDeleteLeft, faEdit, faSave, faTrash, faUpload} from "@fortawesome/free-solid-svg-icons";
+import {Component, OnInit} from '@angular/core';
 
-
-
-interface SchoolActivity {
-   school_activity_name: string;
-    category_total: number;
-    school_activity_id: number;
-    symbol: string;
-    description: string;
-}
 @Component({
     selector: 'school-activities-table',
     styleUrls: ['school-activities-table.component.scss'],
@@ -17,12 +7,10 @@ interface SchoolActivity {
 })
 export class SchoolActivitiesTableComponent implements OnInit{
     searchText: string ='';
-    faEdit = faEdit;
-    faDelete = faTrash;
-    faUpdate = faSave;
-    currentPage = 1;
     category: any;
     dummyData: any;
+    editingRow: any = null;
+    editingColumn: any = null;
     constructor(){
 
     }
@@ -139,8 +127,7 @@ export class SchoolActivitiesTableComponent implements OnInit{
             }
         ]
     }
-    editingRow: any = null;
-    editingColumn: any = null;
+
     isEditing(row: any, column: any): boolean {
         return this.editingRow === row && this.editingColumn == column;
     }

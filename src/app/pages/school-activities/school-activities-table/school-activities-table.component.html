@@ -7,105 +7,6 @@
 </div>
 
 <div class="row">
-<!--        <table mat-table-->
-<!--               [dataSource]="dummyData" multiTemplateDataRows-->
-<!--               class="mat-elevation-z8">-->
-<!--            <ng-container matColumnDef="school_activity_name">-->
-<!--                <th mat-header-cell *matHeaderCellDef> School Activity Name </th>-->
-<!--                <td mat-cell *matCellDef="let element" class="example-element-position">-->
-<!--                    {{element.school_activity_name}}-->
-<!--                </td>-->
-<!--            </ng-container>-->
-
-<!--            &lt;!&ndash; Description Column &ndash;&gt;-->
-<!--            <ng-container matColumnDef="description">-->
-<!--                <th mat-header-cell *matHeaderCellDef> Description </th>-->
-<!--                <td mat-cell *matCellDef="let element" class="example-element-symbol">-->
-<!--                    {{element.description}}-->
-<!--                </td>-->
-<!--            </ng-container>-->
-
-<!--            &lt;!&ndash; Category Total Column &ndash;&gt;-->
-<!--            <ng-container matColumnDef="category_total">-->
-<!--                <th mat-header-cell *matHeaderCellDef> Category Total </th>-->
-<!--                <td mat-cell *matCellDef="let element" class="example-element-name">-->
-<!--                    {{element.category_total}}-->
-<!--                </td>-->
-<!--            </ng-container>-->
-
-<!--            &lt;!&ndash; Actions Column &ndash;&gt;-->
-<!--            <ng-container matColumnDef="action">-->
-<!--                <th mat-header-cell *matHeaderCellDef> Actions </th>-->
-<!--                <td mat-cell *matCellDef="let element" class="example-element-weight">-->
-<!--                    <div *ngIf="!element.isEdit">-->
-<!--                        <fa-icon class="me-3" [icon]="faEdit" (click)="onEdit(element)"></fa-icon>-->
-<!--                        <fa-icon [icon]="faDelete" (click)="onDelete(element)"></fa-icon>-->
-<!--                    </div>-->
-<!--                    <div *ngIf="element.isEdit">-->
-<!--                        <fa-icon [icon]="faUpdate" (click)="onUpdate(element)"></fa-icon>-->
-<!--                    </div>-->
-<!--                </td>-->
-<!--            </ng-container>-->
-<!--            <ng-container matColumnDef="expandedDetail">-->
-<!--                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">-->
-<!--                    <div class="example-element-detail"-->
-<!--                         [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">-->
-<!--                        <table mat-table  [dataSource]="element.category_list" multiTemplateDataRows-->
-<!--                               class="mat-elevation-z8">-->
-<!--                            <ng-container matColumnDef="category_name">-->
-<!--                                <th mat-header-cell *matHeaderCellDef> Category Name </th>-->
-<!--                                <td mat-cell *matCellDef="let element" class="example-element-position">-->
-<!--                                    {{element.category_name}}-->
-<!--                                </td>-->
-<!--                            </ng-container>-->
-
-<!--                            &lt;!&ndash; Description Column &ndash;&gt;-->
-<!--                            <ng-container matColumnDef="description">-->
-<!--                                <th mat-header-cell *matHeaderCellDef> Description </th>-->
-<!--                                <td mat-cell *matCellDef="let element" class="example-element-symbol">-->
-<!--                                    {{element.description}}-->
-<!--                                </td>-->
-<!--                            </ng-container>-->
-
-<!--                            <ng-container matColumnDef="action">-->
-<!--                                <th mat-header-cell *matHeaderCellDef> Actions </th>-->
-<!--                                <td mat-cell *matCellDef="let element" class="example-element-weight">-->
-<!--                                    <div *ngIf="!element.isEdit">-->
-<!--                                        <fa-icon class="me-3" [icon]="faEdit" (click)="onEdit(element)"></fa-icon>-->
-<!--                                        <fa-icon [icon]="faDelete" (click)="onDelete(element)"></fa-icon>-->
-<!--                                    </div>-->
-<!--                                    <div *ngIf="element.isEdit">-->
-<!--                                        <fa-icon [icon]="faUpdate" (click)="onUpdate(element)"></fa-icon>-->
-<!--                                    </div>-->
-<!--                                </td>-->
-<!--                            </ng-container>-->
-
-<!--                            <tr mat-header-row *matHeaderRowDef="columnCategory"></tr>-->
-<!--                            <tr mat-row *matRowDef="let element; let i = index; columns: columnCategory;"-->
-<!--                                class="example-element-row">-->
-<!--                            </tr>-->
-<!--                        </table>-->
-<!--                    </div>-->
-<!--                </td>-->
-<!--            </ng-container>-->
-
-<!--&lt;!&ndash;            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>&ndash;&gt;-->
-<!--            <tr mat-row *matRowDef="let element; let i = index; columns: columnsToDisplay;"-->
-<!--                class="example-element-row"-->
-<!--                [class.example-expanded-row]="expandedElement === element"-->
-<!--                (click)="expandedElement = expandedElement === element ? null : element;">-->
-<!--            </tr>-->
-<!--            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>-->
-<!--        </table>-->
-<!--        <div>-->
-<!--            <pagination-controls-->
-<!--                    (pageChange)="currentPage = $event"-->
-<!--                    [directionLinks]="true"-->
-<!--                    [autoHide]="true"-->
-<!--                    class="pagination justify-content-end mt-3">-->
-<!--            </pagination-controls>-->
-<!--        </div>-->
-
     <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item" *ngFor="let data of dummyData; let i = index">
             <h2 class="accordion-header">
@@ -145,12 +46,13 @@
                                 [sortable]="true">
                             <ng-template let-row="row" ngx-datatable-cell-template>
                                 <input
-                                        *ngIf="isEditing(row, row.category_name)"
+                                        *ngIf="isEditing(row, 'category_name')"
                                         [(ngModel)]="row.category_name"
                                         (blur)="onEditComplete(row)"
+                                        (keydown.enter)="onEditComplete(row)"
                                         class="form-control"
                                         type="text" style="width:75%" />
-                                <span *ngIf="!isEditing(row, row.category_name)" (click)="startEdit(row, row.category_name)">
+                                <span *ngIf="!isEditing(row, 'category_name')" (click)="startEdit(row, 'category_name')">
                                 {{ row.category_name || '-' }}
                               </span>
                             </ng-template>
@@ -163,18 +65,17 @@
                                 [sortable]="true">
                             <ng-template let-row="row" ngx-datatable-cell-template>
                                 <input
-                                        *ngIf="isEditing(row, row.description)"
+                                        *ngIf="isEditing(row, 'description')"
                                         [(ngModel)]="row.description"
                                         (blur)="onEditComplete(row)"
                                         class="form-control"
+                                        (keydown.enter)="onEditComplete(row)"
                                         type="text"  style="width:75%"/>
-                                <span *ngIf="!isEditing(row, row.description)" (click)="startEdit(row, row.description)">
+                                <span *ngIf="!isEditing(row, 'description')" (click)="startEdit(row, 'description')">
                                 {{ row.description || '-' }}
                               </span>
                             </ng-template>
                         </ngx-datatable-column>
-
-                        <!-- Status Column -->
                         <ngx-datatable-column
                                 [width]="60"
                                 [canAutoResize]="true"
@@ -193,7 +94,9 @@
                                 [canAutoResize]="true"
                                 name="Action">
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                <button class="btn btn-danger btn-sm">Delete</button>
+                                <button class="btn btn-danger btn-sm" style="background-color: #ed7c6f; border-color: #ed7c6f; color: white;">
+                                    Delete
+                                </button>
                             </ng-template>
                         </ngx-datatable-column>
                     </ngx-datatable>
