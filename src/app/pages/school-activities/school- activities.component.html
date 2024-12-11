@@ -1,44 +1,7 @@
 <mat-card style="min-height: 500px">
     <mat-card-content>
         <div class="max-width">
-            <div class="form-group row">
-<!--                <div class="col-md-3">-->
-<!--                    <app-select-academic-year-only (academicYearChanged)="onChangeAcademicYear($event)">-->
-<!--                    </app-select-academic-year-only>-->
-<!--                </div>-->
-<!--                <div class="col-md-3">-->
-<!--                    <app-select-school-level-relation-v2 (schoolLevelRelationChanged)="onChangeSchoolLevelRelation($event)"-->
-<!--                                                         [academic_year]="paramForm.get('academic_year')?.value"-->
-<!--                                                         [all]="false"-->
-<!--                                                         [isDisabled]="!paramForm.get('academic_year')?.value">-->
-<!--                    </app-select-school-level-relation-v2>-->
-<!--                </div>-->
-                <div class="col-md-3">
-                    <ng-select [items]="schoolActivities"
-                               (change)="onChangeSchoolActivity($event)"
-                               bindLabel="school_activity_name"
-                               placeholder="Choose School Activity"
-                                class="selector-style">
-                        <ng-template ng-option-tmp let-item="item">
-                            <div class="custom-option-style">
-                                {{item.school_activity_name || 'Unnamed group'}}
-                            </div>
-                        </ng-template>
-                    </ng-select>
-                </div>
-
-                <div class="col-md-3">
-<!--                    <app-select-excul-category-->
-<!--                    [academic_year]="paramForm.get('academic_year')?.value"-->
-<!--                    [school_location_id]="paramForm.get('school_location_id')?.value"-->
-<!--                    [isDisabled]="!paramForm.get('school_location_id')?.value">-->
-<!--                    </app-select-excul-category>-->
-                    <app-select-excul-category>
-                    </app-select-excul-category>
-                </div>
-
-            </div>
-            <div class="row mt-5">
+            <div class="row mt-2">
                 <ng-container>
                     <div class="col-md-12 d-flex">
 
