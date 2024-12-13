@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AlertsComponent } from './pages/alerts/alerts.component';
 import { ChipsComponent } from './pages/chips/chips.component';
 import { ExpansionComponent } from './pages/expansion/expansion.component';
-import { FormsComponent } from './pages/forms/forms.component';
 import { GridListComponent } from './pages/grid-list/grid-list.component';
 import { MenuComponent } from './pages/menu/menu.component';
 import { ProgressSnipperComponent } from './pages/progress-snipper/progress-snipper.component';
@@ -22,6 +21,7 @@ import {BlankComponent} from "./layouts/blank/blank.component";
 import {LoginComponent} from "./authentication/side-login/login.component";
 import {AuthComponent} from "./authentication/auth.component";
 import {SchoolActivitiesComponent} from "./pages/school-activities/school-activities.component";
+import {RulesComponent} from "./pages/rules/rules.component";
 
 const routes: Routes = [
   {
@@ -31,7 +31,7 @@ const routes: Routes = [
       {path:"", redirectTo:"home", pathMatch:"full"},
       {path:"home", component:DashboardAdminComponent},
       {path:"alerts", component:AlertsComponent},
-      {path:"forms", component:FormsComponent},
+      {path:"rules", component: RulesComponent},
       {path:"table", component:ProductComponent},
       {path:"grid-list", component:GridListComponent},
       {path:"menu", component:MenuComponent},

@@ -124,6 +124,12 @@ export class SchoolActivitiesTableComponent implements OnInit{
                         'description': '',
                     }
                 ]
+            },
+            {
+                "school_activity_id": 4,
+                "category_total": 3,
+                "school_activity_name": "Courses",
+                "description": "Yes this is a course, cry about it",
             }
         ]
     }

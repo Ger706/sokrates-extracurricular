@@ -57,9 +57,9 @@ export class FullComponent implements OnInit {
       menu: "School Activities",
     },
     {
-      link: "/forms",
+      link: "/layout/rules",
       icon: "layout",
-      menu: "Forms",
+      menu: "Rules",
     },
     {
       link: "/alerts",

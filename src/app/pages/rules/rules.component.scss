@@ -1,0 +1,13 @@
+.no-border {
+  outline: none;
+  border: none;
+}
+.no-border:focus {
+  outline: none;
+  box-shadow: none;
+}
+.no-border:active {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}

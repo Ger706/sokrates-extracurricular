@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-8">
     </div>
-    <div class="col-4 text-end mb-5">
+    <div class="col-4 text-end mb-3">
         <input type="text" [(ngModel)]="searchText" placeholder="Search" (ngModelChange)="filter($event)" class="form-control">
     </div>
 </div>
@@ -25,7 +25,11 @@
                     class="accordion-collapse collapse"
                     [attr.data-bs-parent]="'#accordionFlushExample'">
                 <div class="accordion-body">
-                    <ngx-datatable
+
+                    <div class="fs-20 mb-4">
+                        {{data.description}}
+                    </div>
+                    <ngx-datatable *ngIf="data.category_list?.length > 0"
                         [rows]="data.category_list"
                         [count]="data.category_list?.length"
                         [externalPaging]="true"

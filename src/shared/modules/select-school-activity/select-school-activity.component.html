@@ -1,0 +1,12 @@
+<ng-select (change)="onChange($event)"
+           [(ngModel)]="schoolActivityValue"
+           [disabled]="isDisabled"
+           [items]="schoolActivityData"
+           [loading]="loading"
+           bindLabel="school_activity_name"
+           [placeholder]= "schoolActivityValue ? '' : ('SELECT' | translate) + ' ' + ('SCHOOL_ACTIVITY' | translate)"
+           class="selector-style">
+  <ng-template ng-option-tmp let-item="item">
+    <div class="custom-option-style"  title="{{item.school_activity_name}}">{{item.school_activity_name}}</div>
+  </ng-template>
+</ng-select>

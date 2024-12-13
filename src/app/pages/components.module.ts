@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AlertsComponent } from './alerts/alerts.component';
 import { FeatherModule } from 'angular-feather';
 import { allIcons } from 'angular-feather/icons';
-import { FormsComponent } from './forms/forms.component';
 import { DemoFlexyModule } from '../demo-flexy-module';
 import { GridListComponent } from './grid-list/grid-list.component';
 import { MenuComponent } from './menu/menu.component';
@@ -28,8 +27,8 @@ import {
   SchoolActivitiesTableComponent
 } from "./school-activities/school-activities-table/school-activities-table.component";
 import {SchoolActivitiesTableModule} from "./school-activities/school-activities-table/school-activities-table.module";
-
-
+import {MatTableModule} from "@angular/material/table";
+import {RulesComponent} from "./rules/rules.component";
 @NgModule({
   imports: [
     CommonModule,
@@ -46,7 +45,7 @@ import {SchoolActivitiesTableModule} from "./school-activities/school-activities
     ExpansionComponent,
     ChipsComponent,
     ProgressComponent,
-    FormsComponent,
+    RulesComponent,
     AlertsComponent,
     GridListComponent,
     TooltipsComponent,
@@ -54,11 +53,12 @@ import {SchoolActivitiesTableModule} from "./school-activities/school-activities
       NgSelectModule,
     SelectExculCategoryModule,
     SelectExculModule,
-      SchoolActivitiesTableModule
+      SchoolActivitiesTableModule,
+      MatTableModule
   ],
   exports: [
     AlertsComponent,
-    FormsComponent,
+    RulesComponent,
     GridListComponent,
     MenuComponent,
     TabsComponent,

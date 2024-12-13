@@ -31,6 +31,8 @@ import {AuthComponent} from "./authentication/auth.component";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {FontAwesomeTestingModule} from "@fortawesome/angular-fontawesome/testing";
 import {ExtracurricularCategoryService} from "../shared/services/extracurricular-category.service";
+import {ExtracurricularRuleService} from "../shared/services/extracurricular-rule.service";
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import {ExtracurricularCategoryService} from "../shared/services/extracurricular
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     NgOtpInputComponent,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatTableModule
   ],
   providers: [ ExtracurricularService,
     SettingService,
@@ -64,9 +67,10 @@ import {ExtracurricularCategoryService} from "../shared/services/extracurricular
     AuthService,
     TranslateService,
     SchoolAndLocationService,
-      UserService,
-      WebsiteService,
-      ExtracurricularCategoryService,
+    UserService,
+    WebsiteService,
+    ExtracurricularCategoryService,
+      ExtracurricularRuleService,
     { provide: WINDOW, useValue: window }
   ],
   bootstrap: [AppComponent]
