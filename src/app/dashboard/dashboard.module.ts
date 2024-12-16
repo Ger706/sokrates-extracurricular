@@ -2,10 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DemoFlexyModule } from '../demo-flexy-module'
 import { DashboardComponent } from './dashboard.component';
-import { SalesComponent } from './dashboard-pages/sales/sales.component';
-import { ActivityComponent } from './dashboard-pages/activity/activity.component';
-import { ProductComponent } from './dashboard-pages/product/product.component';
-import { CardsComponent } from './dashboard-pages/cards/cards.component';
 import { FormsModule } from '@angular/forms';
 import { NgApexchartsModule } from 'ng-apexcharts';
 
@@ -15,10 +11,6 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 @NgModule({
   declarations: [
     DashboardComponent,
-    SalesComponent,
-    ActivityComponent,
-    ProductComponent,
-    CardsComponent,
   ],
   imports: [
     CommonModule,
@@ -28,9 +20,6 @@ import { NgApexchartsModule } from 'ng-apexcharts';
   ],
   exports: [
     DashboardComponent,
-    SalesComponent,
-    ActivityComponent,
-    ProductComponent,
   ]
 })
 export class DashboardModule { }

@@ -6,8 +6,8 @@
   padding: 16px;
 }
 
-.chart-container app-extracurricular-category-chart,
-.chart-container app-extracurricular-attendance-chart {
+.chart-container app-school-program-category-chart,
+.chart-container app-school-program-attendance-chart {
   flex: 1;
   min-width: 300px;
   min-height: 420px
@@ -16,7 +16,7 @@
   .chart-container {
     grid-template-columns: 1fr; /* Single column layout for smaller screens */
   }
-  .chart-container app-extracurricular-attendance-chart {
+  .chart-container app-school-program-attendance-chart {
     flex: 1;
     min-width: 300px;
   }

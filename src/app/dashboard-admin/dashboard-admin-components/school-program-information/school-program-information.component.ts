@@ -6,7 +6,7 @@ import {TranslateService} from "../../../../shared/services/translate.service";
 import {AcademicYear} from "../../../../shared/models/academic-year.model";
 import {AcademicCalendarService} from "../../../../shared/services/academic-calendar.service";
 import {ApexChart, ApexNonAxisChartSeries, ApexResponsive, ChartComponent} from "ng-apexcharts";
-import {ChartOptions} from "../extracurricular-chart/extracurricular-attendance-chart/extracurricular-attendance-chart";
+import {ChartOptions} from "../school-program-chart/school-program-attendance-chart/school-program-attendance-chart";
 
 export type DonutOptions = {
   series: ApexNonAxisChartSeries;
@@ -16,12 +16,12 @@ export type DonutOptions = {
 };
 
 @Component({
-  selector: 'app-extracurricular-information',
-  templateUrl: './extracurricular-information.component.html',
-  styleUrls: ['./extracurricular-information.component.scss'],
+  selector: 'app-school-program-information',
+  templateUrl: './school-program-information.component.html',
+  styleUrls: ['./school-program-information.component.scss'],
 })
 
-export class ExtracurricularInformationComponent implements OnInit {
+export class SchoolProgramInformationComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions !: Partial<ChartOptions> | any;
 

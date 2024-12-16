@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Flexy-admin-angular-lite": {
+    "sokrates-school-program": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
             "allowedCommonJsDependencies": [
               "apexcharts"
             ],
-            "outputPath": "dist/flexy-admin-angular-lite",
+            "outputPath": "dist/sokrates-school-program",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Flexy-admin-angular-lite:build:production"
+              "browserTarget": "sokrates-school-program:build:production"
             },
             "development": {
-              "browserTarget": "Flexy-admin-angular-lite:build:development"
+              "browserTarget": "sokrates-school-program:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Flexy-admin-angular-lite:build"
+            "browserTarget": "sokrates-school-program:build"
           }
         },
         "test": {

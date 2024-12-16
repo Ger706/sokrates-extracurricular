@@ -26,12 +26,12 @@ export interface ChartOptions {
 }
 
 @Component({
-  selector: 'app-extracurricular-category-chart',
-  templateUrl: './extracurricular-category-chart.component.html',
-  styleUrls: ['./extracurricular-category-chart.scss'],
+  selector: 'app-school-program-category-chart',
+  templateUrl: './school-program-category-chart.component.html',
+  styleUrls: ['./school-program-category-chart.scss'],
 
 })
-export class ExtracurricularCategorychart implements OnInit {
+export class SchoolProgramCategoryChart implements OnInit {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions !: Partial<ChartOptions> | any;
 

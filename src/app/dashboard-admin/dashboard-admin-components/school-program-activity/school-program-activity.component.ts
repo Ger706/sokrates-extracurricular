@@ -18,11 +18,11 @@ interface activity {
 }
 
 @Component({
-  selector: 'app-extracurricular-activity',
-  templateUrl: './extracurricular-activity.component.html',
-  styleUrls: ['./extracurricular-activity.component.scss'],
+  selector: 'app-school-program-activity',
+  templateUrl: './school-program-activity.component.html',
+  styleUrls: ['./school-program-activity.component.scss'],
 })
-export class ExtracurricularActivityComponent implements OnInit {
+export class SchoolProgramActivityComponent implements OnInit {
 
   constructor(private exculService : ExtracurricularService,
               private translate: TranslateService,
@@ -98,7 +98,7 @@ export class ExtracurricularActivityComponent implements OnInit {
                 this.activity = response['result']['data'].slice();
                 this.hasData = this.activity.length > 0;
                 // @ts-ignore
-                // const newData: activity =
+                // const newData: school-program-activity =
                 //     {
                 //       description: 'No Activity Yet',
                 //       start_date: '',
@@ -109,8 +109,8 @@ export class ExtracurricularActivityComponent implements OnInit {
                 //         venue: ''
                 //       }]
                 //     };
-                // for (let i = 0; i < 4 - this.activity.length; i++ ) {
-                //   this.activity.push(newData as activity);
+                // for (let i = 0; i < 4 - this.school-program-activity.length; i++ ) {
+                //   this.school-program-activity.push(newData as school-program-activity);
                 // }
                 this.loading = false;
                 this.cd.detectChanges();

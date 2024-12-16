@@ -22,7 +22,7 @@ import {SelectSchoolActivityModule} from "../../../shared/modules/select-school-
   selector: 'app-school-activities',
   standalone: true,
   imports: [DemoFlexyModule, MatButtonModule, MatTooltipModule, MatIconModule, NgApexchartsModule, NgIf, SelectAcademicYearOnlyModule, SelectSchoolLevelRelationV2Module, SelectExculCategoryModule, NgSelectComponent, NgOptionTemplateDirective, SchoolActivitiesTableModule, FormsModule, NgOtpInputComponent, ReactiveFormsModule, SelectSchoolActivityModule],
-  templateUrl: './school- activities.component.html',
+  templateUrl: './school-activities.component.html',
   styleUrls: ['./school-activities.component.scss']
 })
 export class SchoolActivitiesComponent implements OnInit {

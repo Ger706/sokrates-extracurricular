@@ -33,12 +33,12 @@ export type ChartOptions = {
 };
 
 @Component({
-  selector: 'app-extracurricular-attendance-chart',
-  templateUrl: './extracurricular-attendance-chart.component.html',
-  styleUrls: ['./extracurricular-attendance-chart.scss'],
+  selector: 'app-school-program-attendance-chart',
+  templateUrl: './school-program-attendance-chart.component.html',
+  styleUrls: ['./school-program-attendance-chart.scss'],
 
 })
-export class ExtracurricularAttendanceChart implements OnInit {
+export class SchoolProgramAttendanceChart implements OnInit {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions !: Partial<ChartOptions> | any;
 
