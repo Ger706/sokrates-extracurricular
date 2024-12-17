@@ -4,16 +4,22 @@
 
     <div class="max-width">
         <div class="form-group row">
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <app-select-academic-year-only (academicYearChanged)="onChangeAcademicYear($event)">
                 </app-select-academic-year-only>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <app-select-school-level-relation-v2 (schoolLevelRelationChanged)="onChangeSchoolLevelRelation($event)"
                                                      [academic_year]="paramForm.get('academic_year')?.value"
                                                      [all]="false"
                                                      [isDisabled]="!paramForm.get('academic_year')?.value">
                 </app-select-school-level-relation-v2>
+            </div>
+
+            <div class="col-md-4">
+                <app-select-school-activity>
+
+                </app-select-school-activity>
             </div>
         </div>
         <div *ngIf="!hasData && !loading"  class="d-flex justify-content-center align-items-center mt-5 mb-5" style="height:30vh">

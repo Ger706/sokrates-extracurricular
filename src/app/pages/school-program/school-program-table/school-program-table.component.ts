@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-    selector: 'school-activities-table',
-    styleUrls: ['school-activities-table.component.scss'],
-    templateUrl: 'school-activities-table.component.html',
+    selector: 'school-program-table',
+    styleUrls: ['school-program-table.component.scss'],
+    templateUrl: 'school-program-table.component.html',
 })
-export class SchoolActivitiesTableComponent implements OnInit{
+export class SchoolProgramTableComponent implements OnInit{
     searchText: string ='';
     category: any;
     dummyData: any;

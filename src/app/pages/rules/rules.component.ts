@@ -6,7 +6,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCard, MatCardContent} from "@angular/material/card";
-import {SchoolActivitiesTableModule} from "../school-activities/school-activities-table/school-activities-table.module";
 import {
   MatCell,
   MatCellDef,
@@ -43,7 +42,7 @@ import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 @Component({
   selector: 'app-rules',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatCheckboxModule, MatRadioModule, MatButtonModule, MatCard, MatCardContent, SchoolActivitiesTableModule, MatTable, MatColumnDef, MatHeaderCell, MatCell, FaIconComponent, NgxDatatableModule, MatHeaderRow, NgxPaginationModule, MatRow, SelectAcademicYearOnlyModule, SelectSchoolModule, SelectSchoolLevelRelationV2Module, NgIf, MatHeaderRowDef, MatRowDef, MatHeaderCellDef, MatCellDef, NgForOf, MatPaginator, SelectSchoolActivityModule],
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatCheckboxModule, MatRadioModule, MatButtonModule, MatCard, MatCardContent, MatTable, MatColumnDef, MatHeaderCell, MatCell, FaIconComponent, NgxDatatableModule, MatHeaderRow, NgxPaginationModule, MatRow, SelectAcademicYearOnlyModule, SelectSchoolModule, SelectSchoolLevelRelationV2Module, NgIf, MatHeaderRowDef, MatRowDef, MatHeaderCellDef, MatCellDef, NgForOf, MatPaginator, SelectSchoolActivityModule],
   styleUrls: ['./rules.component.scss'],
   templateUrl: './rules.component.html',
 })

@@ -14,18 +14,18 @@ import {
 import {FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule} from "@angular/forms";
 import {SelectExculCategoryModule} from "../../../shared/modules/select-excul-category/select-excul-category.module";
 import {NgOptionTemplateDirective, NgSelectComponent} from "@ng-select/ng-select";
-import {SchoolActivitiesTableModule} from "./school-activities-table/school-activities-table.module";
 import {NgOtpInputComponent} from "ng-otp-input";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {SelectSchoolActivityModule} from "../../../shared/modules/select-school-activity/select-school-activity.module";
+import {SchoolProgramTableModule} from "./school-program-table/school-program-table.module";
 @Component({
-  selector: 'app-school-activities',
+  selector: 'app-school-program',
   standalone: true,
-  imports: [DemoFlexyModule, MatButtonModule, MatTooltipModule, MatIconModule, NgApexchartsModule, NgIf, SelectAcademicYearOnlyModule, SelectSchoolLevelRelationV2Module, SelectExculCategoryModule, NgSelectComponent, NgOptionTemplateDirective, SchoolActivitiesTableModule, FormsModule, NgOtpInputComponent, ReactiveFormsModule, SelectSchoolActivityModule],
-  templateUrl: './school-activities.component.html',
-  styleUrls: ['./school-activities.component.scss']
+  imports: [DemoFlexyModule, MatButtonModule, MatTooltipModule, MatIconModule, NgApexchartsModule, NgIf, SelectAcademicYearOnlyModule, SelectSchoolLevelRelationV2Module, SelectExculCategoryModule, NgSelectComponent, NgOptionTemplateDirective, SchoolProgramTableModule, FormsModule, NgOtpInputComponent, ReactiveFormsModule, SelectSchoolActivityModule],
+  templateUrl: './school-program.component.html',
+  styleUrls: ['./school-program.component.scss']
 })
-export class SchoolActivitiesComponent implements OnInit {
+export class SchoolProgramComponent implements OnInit {
   @ViewChild('addSchoolActivity', {static: true}) public modalAddSchoolActivity: NgbModalRef;
   @ViewChild('addCategory', {static: true}) public modalAddCategory: NgbModalRef;
   constructor(

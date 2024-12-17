@@ -52,9 +52,9 @@ export class FullComponent implements OnInit {
       menu: "Dashboard",
     },
     {
-      link: "/layout/school-activities",
+      link: "/layout/school-program",
       icon: "disc",
-      menu: "School Activities",
+      menu: "School Program",
     },
     {
       link: "/layout/rules",
@@ -62,9 +62,9 @@ export class FullComponent implements OnInit {
       menu: "Rules",
     },
     {
-      link: "/alerts",
+      link: "/layout/alerts",
       icon: "info",
-      menu: "Alerts",
+      menu: "School Activity",
     },
     {
       link: "/grid-list",

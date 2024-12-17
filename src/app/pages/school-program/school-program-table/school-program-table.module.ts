@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SchoolActivitiesTableComponent } from "./school-activities-table.component";
+import { SchoolProgramTableComponent } from "./school-program-table.component";
 import { PipeModule } from "../../../../shared/pipes/pipe.module";
 import { MatCard } from "@angular/material/card";
 import { MatIcon } from "@angular/material/icon";
@@ -35,8 +35,8 @@ import {NgxDatatableModule} from "@swimlane/ngx-datatable";
         NgxPaginationModule,
         NgxDatatableModule
     ],
-    declarations: [SchoolActivitiesTableComponent],
-    exports: [SchoolActivitiesTableComponent],
+    declarations: [SchoolProgramTableComponent],
+    exports: [SchoolProgramTableComponent],
     providers: []
 })
-export class SchoolActivitiesTableModule { }
+export class SchoolProgramTableModule { }

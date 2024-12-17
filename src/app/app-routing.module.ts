@@ -20,7 +20,7 @@ import {UnauthenticatedGuard} from "../shared/guard/unauthenticated.guard";
 import {BlankComponent} from "./layouts/blank/blank.component";
 import {LoginComponent} from "./authentication/side-login/login.component";
 import {AuthComponent} from "./authentication/auth.component";
-import {SchoolActivitiesComponent} from "./pages/school-activities/school-activities.component";
+import {SchoolProgramComponent} from "./pages/school-program/school-program.component";
 import {RulesComponent} from "./pages/rules/rules.component";
 
 const routes: Routes = [
@@ -45,7 +45,7 @@ const routes: Routes = [
       {path:"slider", component:SliderComponent},
       {path:"slide-toggle", component:SlideToggleComponent},
       {path:"tooltip", component:TooltipsComponent},
-      {path:"school-activities", component:SchoolActivitiesComponent},
+      {path:"school-program", component:SchoolProgramComponent},
     ]
   },
   {

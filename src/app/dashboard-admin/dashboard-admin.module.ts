@@ -27,6 +27,7 @@ import {
 import {
   SchoolProgramActivityComponent
 } from "./dashboard-admin-components/school-program-activity/school-program-activity.component";
+import {SelectSchoolActivityModule} from "../../shared/modules/select-school-activity/select-school-activity.module";
 
 
 
@@ -50,7 +51,8 @@ import {
     SelectAcademicYearOnlyModule,
     SelectSchoolLevelRelationV2Module,
     SelectSchoolModule,
-    SelectExculModule
+    SelectExculModule,
+    SelectSchoolActivityModule
   ],
   providers: [
   ],

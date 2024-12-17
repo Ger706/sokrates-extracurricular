@@ -22,21 +22,21 @@ export class CardsComponent implements OnInit {
     {
       image: "assets/images/excul4.jpg",
       btn: "warn",
-      title: 'Create an Extracurricular Activity',
-      description: 'Add a new extracurricular school-program-activity to the system. Provide essential details information to create a new event for students to participate in.'
+      title: 'Create an School Program',
+      description: 'Add a new school-program-activity to the system. Provide essential details information to create a new event for students to participate in.'
 
     },
     {
       image: "assets/images/excul2.jpg",
       btn: "primary",
-      title: 'View Extracurricular Participants',
-      description: 'View a list of students or participants enrolled in a particular extracurricular school-program-activity. You can see their details for better management and tracking.'
+      title: 'View School Program Participants',
+      description: 'View a list of students or participants enrolled in a particular school-program-activity. You can see their details for better management and tracking.'
     },
     {
       image: "assets/images/excul3.jpg",
       btn: "accent",
-      title: 'Set Extracurricular Activity Schedule',
-      description: 'Define the schedule for an extracurricular school-program-activity. This ensures that the school-program-activity is organized and participants can plan accordingly.'
+      title: 'Set School Program Activity Schedule',
+      description: 'Define the schedule for an school-program-activity. This ensures that the school-program-activity is organized and participants can plan accordingly.'
     },
   ]
 
