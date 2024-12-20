@@ -1,0 +1,206 @@
+stages:
+  - build-branch
+  - build-pre-production
+  - build-production
+  - deploy-master
+  - deploy-master-v2
+  - deploy-pre-production
+  - deploy-pre-production-v2
+  - deploy-production
+  - deploy-production-v2
+
+build-branch:
+  tags:
+    - sokrates-runner-school-program
+  stage: build-branch
+  script:
+    - npm install
+    - npx tslint -c tslint.json "src/app/**/*.ts?(x)"
+    - npm run build-dev
+  artifacts:
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+    paths:
+      - dist/sokrates-school-program
+    untracked: false
+    expire_in: 1 hour
+  except:
+    - master_v2
+    - pre-production
+    - production
+
+# build-pre-production:
+#   tags:
+#     - sokrates-runner-multitenant-frontend
+#   stage: build-pre-production
+#   script:
+#     - npm install
+#     - npx tslint -c tslint.json "src/app/**/*.ts?(x)"
+#     - npm run build-pre-prod
+#   artifacts:
+#     name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+#     paths:
+#       - dist/sokrates-school-program
+#     untracked: false
+#     expire_in: 1 days
+#   only:
+#     - pre-production
+
+# build-production:
+#   tags:
+#     - sokrates-runner-multitenant-frontend
+#   stage: build-production
+#   script:
+#     - npm install
+#     - npx tslint -c tslint.json "src/app/**/*.ts?(x)"
+#     - npm run build-prod
+#   artifacts:
+#     name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+#     paths:
+#       - dist/sokrates-school-program
+#     untracked: false
+#     expire_in: 2 days
+#   only:
+#     - production
+
+# deploy-master:
+#   tags:
+#     - sokrates-runner-multitenant-frontend
+#   stage: deploy-master
+#   dependencies:
+#     - build-branch
+#   script:
+#     - aws s3 rm s3://sokrates.xyz --recursive --profile development
+#     - aws s3 cp dist/sokrates-school-program/ s3://sokrates.xyz --recursive --profile development
+#     - aws cloudfront create-invalidation --distribution-id=E2RTFKPOOE5SG6 --paths "/*" --profile development
+#   only:
+#     - master_v2
+
+deploy-master-v2:
+  tags:
+    - sokrates-runner-school-program
+  stage: deploy-master-v2
+  script:
+    - cd $HOME/deploy_master
+    - terraform init
+    - terraform apply -auto-approve
+    - sleep 30
+    - |
+      set -e
+      trap 'echo "SSH Error. Stopping instance..."; terraform destroy -auto-approve' ERR
+      ssh -i "../sokrates-internal.pem" -o StrictHostKeyChecking=no ec2-user@$(terraform output -raw instance_ip) <<EOF
+        set -e
+        trap "exit 1" ERR
+        cd repository/sokrates-school-program
+        git checkout master_v2
+        git stash
+        git pull
+        nvm use 14
+        rm -Rf dist/
+        npm install
+        npx tslint -c tslint.json "src/app/**/*.ts?(x)"
+        npm run build-dev-v2
+        aws s3 rm s3://sokrates.xyz --recursive --profile development
+        aws s3 cp dist/sokrates-school-program/ s3://sokrates.xyz --recursive --profile development
+        aws cloudfront create-invalidation --distribution-id=E2RTFKPOOE5SG6 --paths "/*" --profile development
+        exit
+      EOF
+    - echo "Deploy Success. Stopping instance..."
+    - terraform destroy -auto-approve
+  only:
+    - master_v2
+
+# deploy-pre-production:
+#   tags:
+#     - sokrates-runner-multitenant-frontend
+#   stage: deploy-pre-production
+#   dependencies:
+#     - build-pre-production
+#   script:
+#     - aws s3 rm s3://pre.sokrates.xyz --recursive --profile development
+#     - aws s3 cp dist/sokrates-school-program/ s3://pre.sokrates.xyz --recursive --profile development
+#     - aws cloudfront create-invalidation --distribution-id=E3290KY1WGMHAZ --paths "/*" --profile development
+#   only:
+#     - pre-production
+
+deploy-pre-production-v2:
+  tags:
+    - sokrates-runner-school-program
+  stage: deploy-pre-production-v2
+  script:
+    - cd $HOME/deploy_pre_prod
+    - terraform init
+    - terraform apply -auto-approve
+    - sleep 30
+    - |
+      set -e
+      trap 'echo "SSH Error. Stopping instance..."; terraform destroy -auto-approve' ERR
+      ssh -i "../sokrates-internal.pem" -o StrictHostKeyChecking=no ec2-user@$(terraform output -raw instance_ip) <<EOF
+        set -e
+        trap "exit 1" ERR
+        cd repository/sokrates-school-program
+        git checkout pre-production
+        git stash
+        git pull
+        nvm use 14
+        rm -Rf dist/
+        npm install
+        npx tslint -c tslint.json "src/app/**/*.ts?(x)"
+        npm run build-pre-prod-v2
+        aws s3 rm s3://preprod-sokratesschoolprogram --recursive --profile production
+        aws s3 cp dist/sokrates-school-program/ s3://preprod-sokratesschoolprogram --recursive --profile production
+        aws cloudfront create-invalidation --distribution-id=E3996FPK3EGQ34 --paths "/*" --profile production
+        exit
+      EOF
+    - echo "Deploy Success. Stopping instance..."
+    - terraform destroy -auto-approve
+  only:
+    - pre-production
+
+# deploy-production:
+#   tags:
+#     - sokrates-runner-multitenant-frontend
+#   stage: deploy-production
+#   dependencies:
+#     - build-production
+#   when: manual # MANUAL DEPLOY,
+#   script:
+#     - aws s3 rm s3://sokratesmultitenantfrontend --recursive --profile production
+#     - aws s3 cp dist/sokrates-school-program/ s3://sokratesmultitenantfrontend --recursive --profile production
+#     - aws cloudfront create-invalidation --distribution-id=E98TT1D23CS1V --paths "/*" --profile production
+#   only:
+#     - production
+
+deploy-production-v2:
+  tags:
+    - sokrates-runner-school-program
+  stage: deploy-production-v2
+  when: manual # MANUAL DEPLOY,
+  script:
+    - cd $HOME/deploy_prod
+    - terraform init
+    - terraform apply -auto-approve
+    - sleep 30
+    - |
+      set -e
+      trap 'echo "SSH Error. Stopping instance..."; terraform destroy -auto-approve' ERR
+      ssh -i "../sokrates-internal.pem" -o StrictHostKeyChecking=no ec2-user@$(terraform output -raw instance_ip) <<EOF
+        set -e
+        trap "exit 1" ERR
+        cd repository/sokrates-school-program
+        git checkout production
+        git stash
+        git pull
+        nvm use 14
+        rm -Rf dist/
+        npm install
+        npx tslint -c tslint.json "src/app/**/*.ts?(x)"
+        npm run build-prod
+        aws s3 rm s3://sokratesschoolprogram --recursive --profile production
+        aws s3 cp dist/sokrates-school-program/ s3://sokratesschoolprogram --recursive --profile production
+        aws cloudfront create-invalidation --distribution-id=E98TT1D23CS1V --paths "/*" --profile production
+        exit
+      EOF
+    - echo "Deploy Success. Stopping instance..."
+    - terraform destroy -auto-approve
+  only:
+    - production
