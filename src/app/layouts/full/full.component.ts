@@ -47,7 +47,7 @@ export class FullComponent implements OnInit {
   currentUser : User | null = null;
   sidebarMenu: sidebarMenu[] = [
     {
-      link: "/layout/home",
+      link: "/layout/dashboard",
       icon: "home",
       menu: "Dashboard",
     },
@@ -62,7 +62,7 @@ export class FullComponent implements OnInit {
       menu: "Rules",
     },
     {
-      link: "/layout/alerts",
+      link: "/layout/school-activity",
       icon: "info",
       menu: "School Activity",
     },

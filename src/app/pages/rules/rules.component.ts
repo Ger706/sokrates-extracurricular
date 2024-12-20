@@ -1,55 +1,27 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatCard, MatCardContent} from "@angular/material/card";
+import {FormControl, FormGroup} from '@angular/forms';
 import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderCellDef,
-  MatHeaderRow,
-  MatHeaderRowDef,
-  MatRow,
-  MatRowDef,
-  MatTable,
   MatTableDataSource
 } from "@angular/material/table";
 import {ExtracurricularRuleService} from "../../../shared/services/extracurricular-rule.service";
 import {ExtracurricularRule} from "../../../shared/models/extracurricular-rule.model";
 import {ToastrService} from "ngx-toastr";
-import {FaIconComponent} from "@fortawesome/angular-fontawesome";
-import {NgxDatatableModule} from "@swimlane/ngx-datatable";
-import {NgxPaginationModule} from "ngx-pagination";
-import {
-  SelectAcademicYearOnlyModule
-} from "../../../shared/modules/select-academic-year-only/select-academic-year-only.module";
-import {SelectSchoolModule} from "../../../shared/modules/select-school/select-school.module";
-import {
-  SelectSchoolLevelRelationV2Module
-} from "../../../shared/modules/select-school-level-relation-v2/select-school-level-relation-v2.module";
-import {NgForOf, NgIf} from "@angular/common";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {AcademicYear} from "../../../shared/models/academic-year.model";
 import {AcademicCalendarService} from "../../../shared/services/academic-calendar.service";
-import {SelectSchoolActivityModule} from "../../../shared/modules/select-school-activity/select-school-activity.module";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-rules',
-  standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatCheckboxModule, MatRadioModule, MatButtonModule, MatCard, MatCardContent, MatTable, MatColumnDef, MatHeaderCell, MatCell, FaIconComponent, NgxDatatableModule, MatHeaderRow, NgxPaginationModule, MatRow, SelectAcademicYearOnlyModule, SelectSchoolModule, SelectSchoolLevelRelationV2Module, NgIf, MatHeaderRowDef, MatRowDef, MatHeaderCellDef, MatCellDef, NgForOf, MatPaginator, SelectSchoolActivityModule],
   styleUrls: ['./rules.component.scss'],
   templateUrl: './rules.component.html',
 })
 export class RulesComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('viewRule', {static: true}) public modalViewRule: NgbModalRef;
-  checked = true;
+  @ViewChild('addRule', {static: true}) public modalAddRule: NgbModalRef;
+  @ViewChild('editRule', {static: true}) public modalEditRule: NgbModalRef;
   heading = "Rules";
   loading = false;
   paramForm: FormGroup;
@@ -61,6 +33,10 @@ export class RulesComponent implements OnInit, AfterViewInit {
   hasData = false;
   detailData: any;
   columnsToDisplay = ['rule_description','school_location', 'year_level', 'selection', 'status', 'action'];
+  newRuleForm: FormGroup;
+  editRuleForm: FormGroup;
+  checkApiRun: Subscription;
+  disableButtonAdd = true;
   constructor(private ruleService: ExtracurricularRuleService,
               private toastr: ToastrService,
               private academicService: AcademicCalendarService,
@@ -68,12 +44,29 @@ export class RulesComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.trackFormChanges();
   }
 
   initForm() {
     this.paramForm = new FormGroup({
       'school_location_id': new FormControl(null),
     });
+
+    this.newRuleForm = new FormGroup({
+      'rule_name': new FormControl(null),
+      'rule_description': new FormControl(null),
+      'year_level_id': new FormControl([]),
+      'school_location_id': new FormControl(null),
+      'school_level_id': new FormControl(null),
+    })
+
+    this.editRuleForm = new FormGroup({
+      'rule_name': new FormControl(null),
+      'rule_description': new FormControl(null),
+      'year_level_id': new FormControl([]),
+      'school_location_id': new FormControl(null),
+      'school_level_id': new FormControl(null),
+    })
     this.getCurrentAcademicYear();
   }
 
@@ -93,10 +86,39 @@ export class RulesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataRules.paginator = this.paginator;
   }
-  onChangeSchoolLevel(item: any) {
-    this.paramForm.controls['school_location_id'].markAsTouched();
-    this.paramForm.controls['school_location_id'].setValue(item ? item.school_id : null);
-    this.getRuleData();
+  trackFormChanges() {
+    this.newRuleForm.valueChanges.subscribe(() => {
+      this.disableButtonAdd =
+          !this.newRuleForm.get('rule_name')?.value ||
+          !this.newRuleForm.get('rule_description')?.value ||
+          !this.newRuleForm.get('school_location_id')?.value ||
+          !this.newRuleForm.get('year_level_id')?.value
+    });
+  }
+  onChangeSchoolLevel(item: any, isAdd = false) {
+
+    if (!isAdd) {
+      this.paramForm.controls['school_location_id'].markAsTouched();
+      this.paramForm.controls['school_location_id'].setValue(item ? item.school_location_id : null);
+      this.getRuleData();
+    } else {
+      this.newRuleForm.controls['school_location_id'].markAsTouched();
+      this.newRuleForm.controls['school_location_id'].setValue(item ? item.school_location_id : null);
+
+      this.newRuleForm.controls['school_level_id'].markAsTouched();
+      this.newRuleForm.controls['school_level_id'].setValue(item ? item.school_level_id : null);
+
+      this.newRuleForm.controls['year_level_id'].setValue(null);
+    }
+
+  }
+  onChangeYearLevel(item: any) {
+    if (!item) {
+      return;
+    }
+    this.newRuleForm.controls['year_level_id'].markAsTouched();
+    const data = item.map((i: { year_level_id: any; }) => i.year_level_id);
+    this.newRuleForm.controls['year_level_id'].setValue(data.length > 0 ? data : null);
   }
   onChangePage(event: PageEvent) {
     this.currentPage = event.pageIndex + 1;
@@ -105,7 +127,10 @@ export class RulesComponent implements OnInit, AfterViewInit {
   }
   getRuleData () {
     this.loading = true;
-    this.ruleService.getFilteredRule({
+    if (this.checkApiRun) {
+      this.checkApiRun.unsubscribe();
+    }
+    this.checkApiRun = this.ruleService.getFilteredRule({
       school_location_id: this.paramForm.get('school_location_id')?.value,
       page: this.currentPage,
       pagination: true,
@@ -145,15 +170,23 @@ export class RulesComponent implements OnInit, AfterViewInit {
 
   }
 
-  getRuleDetail(id: number) {
+  getRuleDetail(id: number, isEdit = false) {
     this.ruleService.getRule(id)
         .subscribe(
             (response: ExtracurricularRule) => {
               // @ts-ignore
               if (response['error'] === 0) {
                 // @ts-ignore
-                this.detailData = response['result']['data'];
-
+                const data = response['result']['data'];
+                this.detailData = data;
+                if (isEdit) {
+                  this.editRuleForm.patchValue({
+                    rule_description: data.rule_description,
+                    school_location_id: data.school_location.school_location_id,
+                    year_level_id: data.year_level.map((i: { year_level: any; })=> i.year_level)
+                  });
+                }
+                console.log(this.editRuleForm.value);
               } else {
                 // @ts-ignore
                 this.toastr.error('[' + this.heading + '] ' + response['message'], 'Invalid Response');
@@ -164,15 +197,34 @@ export class RulesComponent implements OnInit, AfterViewInit {
             });
   }
   onOpenModelAddRule () {
-    // this.modalService.open(this.modalAddCategory, {
-    //   ariaLabelledBy: 'modal-basic-title',
-    //   keyboard: false,
-    //   size: 'lg'
-    // }).result.then((result: any) => {
-    //
-    // }, (reason: any) => {
-    //
-    // });
-  }
+    this.modalService.open(this.modalAddRule, {
+      ariaLabelledBy: 'modal-basic-title',
+      keyboard: false,
+      size: 'lg'
+    }).result.then((result: any) => {
 
+    }, (reason: any) => {
+
+    });
+  }
+  onOpenModelEditRule (data: any) {
+    this.modalService.open(this.modalEditRule, {
+      ariaLabelledBy: 'modal-basic-title',
+      keyboard: false,
+      size: 'lg'
+    }).result.then((result: any) => {
+
+    }, (reason: any) => {
+
+    });
+    this.getRuleDetail(data.rule_id, true);
+
+
+  }
+  onAddRule() {
+    console.log(this.newRuleForm.value);
+  }
+  onEditRule() {
+    console.log(this.editRuleForm.value);
+  }
 }

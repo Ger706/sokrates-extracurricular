@@ -1,0 +1,23 @@
+<ng-select (change)="onChange($event)"
+           [(ngModel)]="newVarForPathwayModel"
+           [disabled]="(!school_level_id && !school_location_id && !all && isDisabled === null) || isDisabled"
+           [items]="yearLevelRelations"
+           [loading]="loading"
+           [multiple]="multiple"
+           [selectableGroup]="false"
+           bindLabel="year_level_name"
+           bindValue="year_pathway_relation_id"
+           [groupBy] ="isGroupPathway ? 'pathway_name': ''"
+           class="selector-style"
+           placeholder="{{ newVarForPathwayModel?.length > 0 ? '' : ( all ? 'All Year Level' : 'Select Year Level')}}">
+
+    <ng-template ng-option-tmp let-item="item" let-index="index">
+        <div [ngClass]="{'custom-option-style': true, 'disabled-option': isDisabled}">
+            {{ item.year_level_name }}
+        </div>
+    </ng-template>
+
+    <ng-template ng-optgroup-tmp let-item="item">
+        <div class="group-style">{{ item.pathway_name || 'Unnamed group' }}</div>
+    </ng-template>
+</ng-select>

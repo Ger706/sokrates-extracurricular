@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
     selector: 'school-program-table',
@@ -6,19 +6,19 @@ import {Component, OnInit} from '@angular/core';
     templateUrl: 'school-program-table.component.html',
 })
 export class SchoolProgramTableComponent implements OnInit{
-    searchText: string ='';
     category: any;
     dummyData: any;
     editingRow: any = null;
     editingColumn: any = null;
+
+    @Input()
+    school_location_id = null;
+
     constructor(){
 
     }
     ngOnInit(): void {
-        this.setPage();
-    }
-    filter(event: any) {
-
+            this.setPage();
     }
 
     setPage($event: any = null) {

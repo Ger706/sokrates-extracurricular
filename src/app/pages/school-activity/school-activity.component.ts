@@ -23,11 +23,10 @@ interface desc {
 
 @Component({
   selector: 'app-alerts',
-  standalone: true,
-  imports: [FeatherModule, NgFor],
-  templateUrl: './alerts.component.html',
+  styleUrls: ['./school-activity.component.scss'],
+  templateUrl: './school-activity.component.html',
 })
-export class AlertsComponent implements OnInit {
+export class SchoolActivityComponent implements OnInit {
 
   constructor() { }
 

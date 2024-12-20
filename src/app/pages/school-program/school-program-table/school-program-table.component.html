@@ -1,12 +1,4 @@
 <div class="row">
-    <div class="col-8">
-    </div>
-    <div class="col-4 text-end mb-3">
-        <input type="text" [(ngModel)]="searchText" placeholder="Search" (ngModelChange)="filter($event)" class="form-control">
-    </div>
-</div>
-
-<div class="row">
     <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item" *ngFor="let data of dummyData; let i = index">
             <h2 class="accordion-header">

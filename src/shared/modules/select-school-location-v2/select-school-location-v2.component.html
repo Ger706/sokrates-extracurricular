@@ -1,0 +1,17 @@
+<ng-select (change)="onChange($event)"
+           [(ngModel)]="schoolLocationValue"
+           [items]="schoolLocations"
+           [loading]="loading"
+           [selectableGroup]="false"
+           bindLabel="school_short_address"
+           groupBy="school_name"
+           [disabled]="isDisabled"
+           class="selector-style"
+           placeholder="{{schoolLocationValue ? '' : (all ? 'ALL' : 'SELECT') | translate}} {{ schoolLocationValue ? '' : 'SCHOOL_LOCATION' | translate }}">
+  <ng-template ng-option-tmp let-item="item">
+    <div title="{{item.school_short_address}}">{{item.school_short_address}}</div>
+  </ng-template>
+  <ng-template let-item="item" ng-optgroup-tmp>
+    {{item.school_name || 'Unnamed group'}}
+  </ng-template>
+</ng-select>

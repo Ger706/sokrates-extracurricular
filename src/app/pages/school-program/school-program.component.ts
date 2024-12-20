@@ -1,42 +1,28 @@
-import {ChangeDetectorRef, Component, OnChanges, OnInit, ViewChild} from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { DemoFlexyModule } from 'src/app/demo-flexy-module';
-import {NgApexchartsModule} from "ng-apexcharts";
-import {NgIf} from "@angular/common";
-import {
-  SelectAcademicYearOnlyModule
-} from "../../../shared/modules/select-academic-year-only/select-academic-year-only.module";
-import {
-  SelectSchoolLevelRelationV2Module
-} from "../../../shared/modules/select-school-level-relation-v2/select-school-level-relation-v2.module";
-import {FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule} from "@angular/forms";
-import {SelectExculCategoryModule} from "../../../shared/modules/select-excul-category/select-excul-category.module";
-import {NgOptionTemplateDirective, NgSelectComponent} from "@ng-select/ng-select";
-import {NgOtpInputComponent} from "ng-otp-input";
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {FormControl, FormGroup} from "@angular/forms";
 import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {SelectSchoolActivityModule} from "../../../shared/modules/select-school-activity/select-school-activity.module";
-import {SchoolProgramTableModule} from "./school-program-table/school-program-table.module";
+import {TranslateService} from "../../../shared/services/translate.service";
 @Component({
   selector: 'app-school-program',
-  standalone: true,
-  imports: [DemoFlexyModule, MatButtonModule, MatTooltipModule, MatIconModule, NgApexchartsModule, NgIf, SelectAcademicYearOnlyModule, SelectSchoolLevelRelationV2Module, SelectExculCategoryModule, NgSelectComponent, NgOptionTemplateDirective, SchoolProgramTableModule, FormsModule, NgOtpInputComponent, ReactiveFormsModule, SelectSchoolActivityModule],
   templateUrl: './school-program.component.html',
   styleUrls: ['./school-program.component.scss']
 })
 export class SchoolProgramComponent implements OnInit {
-  @ViewChild('addSchoolActivity', {static: true}) public modalAddSchoolActivity: NgbModalRef;
+  @ViewChild('addSchoolProgram', {static: true}) public modalAddSchoolProgram: NgbModalRef;
   @ViewChild('addCategory', {static: true}) public modalAddCategory: NgbModalRef;
   constructor(
       private modalService: NgbModal,
-      private cd: ChangeDetectorRef
-  ) { }
+      private cd: ChangeDetectorRef,
+      private translate: TranslateService
+  ) {
+    translate.load('main', 'extracurricular');
+  }
   paramForm: FormGroup;
   hasData: boolean = false;
   task = null;
+  searchText: string = '';
   loading = false;
-  addActivityForm :FormGroup;
+  addProgramForm :FormGroup;
   addCategoryForm :FormGroup;
   disableCategorySubmit = true;
   ngOnInit() {
@@ -46,15 +32,18 @@ export class SchoolProgramComponent implements OnInit {
   trackFormChanges() {
     this.addCategoryForm.valueChanges.subscribe(() => {
       this.disableCategorySubmit =
-          !this.addCategoryForm.get('school_activity_id')?.value ||
+          !this.addCategoryForm.get('school_program_id')?.value ||
           !this.addCategoryForm.get('category_name')?.value ||
           !this.addCategoryForm.get('description')?.value;
     });
   }
+  filter(event: any) {
+
+  }
   initForm() {
 
-    this.addActivityForm = new FormGroup({
-      'school_activity_name': new FormControl(null),
+    this.addProgramForm = new FormGroup({
+      'school_program_name': new FormControl(null),
       'description': new FormControl(null),
     })
     this.paramForm = new FormGroup({
@@ -67,20 +56,24 @@ export class SchoolProgramComponent implements OnInit {
       'school_level_relation_id': new FormControl(null)
     });
     this.addCategoryForm = new FormGroup({
-      'school_activity_id': new FormControl(null),
+      'school_program_id': new FormControl(null),
       'category_name': new FormControl(null),
       'description': new FormControl(null),
     })
   }
 
-  onChangeSchoolActivity(item: any) {
-    this.addCategoryForm.controls['school_activity_id'].markAsTouched();
-    this.addCategoryForm.controls['school_activity_id'].setValue(item ? item.school_activity_id : null);
+  onChangeSchoolProgram(item: any) {
+    this.addCategoryForm.controls['school_program_id'].markAsTouched();
+    this.addCategoryForm.controls['school_program_id'].setValue(item ? item.school_program_id : null);
   }
 
+  onChangeSchoolLocation(item: any) {
+    this.paramForm.controls['school_location_id'].markAsTouched();
+    this.paramForm.controls['school_location_id'].setValue(item ? item.school_location_id : null);
+  }
 
-  onOpenModelAddSchoolActivity () {
-    this.modalService.open(this.modalAddSchoolActivity, {
+  onOpenModelAddSchoolProgram () {
+    this.modalService.open(this.modalAddSchoolProgram, {
       ariaLabelledBy: 'modal-basic-title',
       keyboard: false,
       size: 'lg'
@@ -103,8 +96,8 @@ export class SchoolProgramComponent implements OnInit {
     });
   }
 
-  onAddSchoolActivity() {
-    console.log(this.addActivityForm.value);
+  onAddSchoolProgram() {
+    console.log(this.addProgramForm.value);
   }
 
   onAddCategory() {

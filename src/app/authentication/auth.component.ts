@@ -42,7 +42,7 @@ export class AuthComponent implements OnInit {
         (response: Auth) => {
           // @ts-ignore
           if (response['error'] === 0) {
-            window.location.href = '/layout/home'
+            window.location.href = '/layout/dashboard-admin'
           }
         },
         error => {

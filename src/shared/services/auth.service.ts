@@ -217,7 +217,7 @@ export class AuthService {
       this.settings.setConfig('client.isInternalCandidate', this.auth.isInternalCandidate);
       this.settings.setConfig('client.survey_id', this.auth.survey_id);
 
-      this.router.navigate(['/layout/home']);
+      this.router.navigate(['/layout/dashboard']);
     }
 
     this.auth = null;

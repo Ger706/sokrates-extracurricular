@@ -4,24 +4,37 @@
             <div class="row mt-2">
                 <ng-container>
                     <div class="col-md-12 d-flex">
-                            <button class="gradient-button col-md-2 me-1" role="button" (click)="onOpenModelAddSchoolActivity()"> Add School Program</button>
+                            <button class="gradient-button col-md-2 me-1" role="button" (click)="onOpenModelAddSchoolProgram()"> Add School Program</button>
                             <button class="gradient-button col-md-2 me-1" role="button" (click)="onOpenModelAddCategory()"> Add Categories</button>
                     </div>
                 </ng-container>
             </div>
+            <div class="row">
+                <div class="col-8">
+                </div>
+                <div class="col-4 text-end mb-3">
+                    <input type="text" [(ngModel)]="searchText" placeholder="Search" (ngModelChange)="filter($event)" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <app-select-school-location-v2 (schoolLocationChanged)="onChangeSchoolLocation($event)">
 
-            <school-program-table></school-program-table>
+                </app-select-school-location-v2>
+            </div>
+            <div *ngIf="paramForm.get('school_location_id')?.value">
+                <school-program-table></school-program-table>
+            </div>
         </div>
     </mat-card-content>
 </mat-card>
 
 
-<ng-template #addSchoolActivity let-modal let-close="close">
-    <form #activityForm (ngSubmit)="onAddSchoolActivity()" [formGroup]="addActivityForm">
+<ng-template #addSchoolProgram let-modal let-close="close">
+    <form #programForm (ngSubmit)="onAddSchoolProgram()" [formGroup]="addProgramForm">
         <div class="modal-header">
             <div class="row">
                 <div class="col-md-12">
-                    <h5 class="modal-title">Add School Activity</h5>
+                    <h5 class="modal-title">Add School Program</h5>
                 </div>
             </div>
         </div>
@@ -29,14 +42,14 @@
             <div class="modal-body">
                 <div class="row float-start mb-5">
                     <div class="d-grid" style="max-width: 600px; margin: 0 auto; gap: 10px;">
-                        <span style="font-size: 14px; font-weight: bold; color: #333;">School Activity Name</span>
+                        <span style="font-size: 14px; font-weight: bold; color: #333;">School Program Name</span>
                         <input placeholder="School Activity Name"
                                class="form-control p-3 fs-14 border-1 rounded h-25 w-100"
-                               style="outline: none;" formControlName="school_activity_name">
+                               style="outline: none;" formControlName="school_program_name">
                     </div>
                     <div class="d-grid">
-                        <span style="font-size: 14px; font-weight: bold; color: #333;">School Activity Description</span>
-                        <textarea class="form-control" rows="3" placeholder="School Activity Description..." formControlName="description"></textarea>
+                        <span style="font-size: 14px; font-weight: bold; color: #333;">School Program Description</span>
+                        <textarea class="form-control" rows="3" placeholder="School Program Description..." formControlName="description"></textarea>
                     </div>
 
                     <div>
@@ -63,18 +76,18 @@
             <div class="modal-body">
                 <div class="row float-start mb-5 d-grid col-md-12">
                     <div class="d-grid col-md-5 mb-2" style="max-width: 600px; gap: 10px;">
-                        <app-select-school-activity (schoolActivityChanged)="onChangeSchoolActivity($event)">
+                        <app-select-school-activity (schoolActivityChanged)="onChangeSchoolProgram($event)">
 
                         </app-select-school-activity>
                     </div>
                     <div class="d-grid col-md-9" style="max-width: 600px; gap: 10px;">
-                        <span style="font-size: 14px; font-weight: bold; color: #333;">School Activity Name</span>
+                        <span style="font-size: 14px; font-weight: bold; color: #333;">Category Name</span>
                         <input placeholder="Category Name"
                                class="form-control p-3 fs-14 border-1 rounded h-25 w-100"
                                style="outline: none;" formControlName="category_name">
                     </div>
                     <div class="d-grid col-md-9">
-                        <span style="font-size: 14px; font-weight: bold; color: #333;">School Activity Description</span>
+                        <span style="font-size: 14px; font-weight: bold; color: #333;">Category Description</span>
                         <textarea class="form-control" rows="3" placeholder="Category Description..." formControlName="description"></textarea>
                     </div>
 

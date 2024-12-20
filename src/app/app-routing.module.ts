@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AlertsComponent } from './pages/alerts/alerts.component';
 import { ChipsComponent } from './pages/chips/chips.component';
 import { ExpansionComponent } from './pages/expansion/expansion.component';
 import { GridListComponent } from './pages/grid-list/grid-list.component';
@@ -16,22 +15,22 @@ import { TooltipsComponent } from './pages/tooltips/tooltips.component';
 import { ProductComponent } from './dashboard-admin/dashboard-admin-components/product/product.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 import { FullComponent } from './layouts/full/full.component';
-import {UnauthenticatedGuard} from "../shared/guard/unauthenticated.guard";
 import {BlankComponent} from "./layouts/blank/blank.component";
-import {LoginComponent} from "./authentication/side-login/login.component";
 import {AuthComponent} from "./authentication/auth.component";
-import {SchoolProgramComponent} from "./pages/school-program/school-program.component";
 import {RulesComponent} from "./pages/rules/rules.component";
+import {SchoolProgramComponent} from "./pages/school-program/school-program.component";
+import {SchoolActivityComponent} from "./pages/school-activity/school-activity.component";
 
 const routes: Routes = [
   {
     path:"layout",
     component:FullComponent,
     children: [
-      {path:"", redirectTo:"home", pathMatch:"full"},
-      {path:"home", component:DashboardAdminComponent},
-      {path:"alerts", component:AlertsComponent},
+      {path:"", redirectTo:"dashboard", pathMatch:"full"},
+      {path:"dashboard", component:DashboardAdminComponent},
+      {path:"school-program", component:SchoolProgramComponent},
       {path:"rules", component: RulesComponent},
+      {path:"school-activity", component:SchoolActivityComponent},
       {path:"table", component:ProductComponent},
       {path:"grid-list", component:GridListComponent},
       {path:"menu", component:MenuComponent},
@@ -45,7 +44,6 @@ const routes: Routes = [
       {path:"slider", component:SliderComponent},
       {path:"slide-toggle", component:SlideToggleComponent},
       {path:"tooltip", component:TooltipsComponent},
-      {path:"school-program", component:SchoolProgramComponent},
     ]
   },
   {

@@ -66,7 +66,7 @@
                                 <button class="btn w-25 no-border" style="color: dodgerblue;" (click)="onOpenModalViewRule(element)">
                                     View
                                 </button>
-                                <button class="btn w-25 no-border" style="color: forestgreen;">
+                                <button class="btn w-25 no-border" style="color: forestgreen;" (click)="onOpenModelEditRule(element)">
                                     Edit
                                 </button>
                                 <button class="btn w-25 no-border" style="color: indianred;">
@@ -103,15 +103,127 @@
         <ng-container>
             <div class="modal-body">
                 <div class="row float-start mb-5 d-grid col-md-12">
+                    <table class="col-md-6">
+                       <tr>
+                           <td>Rule Description :</td>
+                           <td> {{detailData.rule_description}}</td>
+                       </tr>
+                        <tr>
+                            <td>School Location :</td>
+                            <td>
+                                {{detailData.school_location.school_short_address}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Year Level :</td>
+                            <td>
+                               <span *ngFor="let yearLevel of detailData.year_level">
+                            {{yearLevel.year_level.description}},
+                        </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </ng-container>
+</ng-template>
+
+<ng-template #addRule let-modal let-close="close">
+        <form #programForm (ngSubmit)="onAddRule()" [formGroup]="newRuleForm">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="modal-title">Add Rule</h5>
+                    </div>
+                </div>
+            </div>
+            <ng-container>
+                <div class="modal-body">
+                    <div class="row float-start mb-5 d-grid col-md-12">
+                        <div class="d-grid col-md-5 mb-2">
+                                <app-select-school-level-relation-v2
+                                (schoolLevelRelationChanged)="onChangeSchoolLevel($event, true)"
+                                [academic_year]="currentAcademic">
+
+                                </app-select-school-level-relation-v2>
+                        </div>
+                        <div class="d-grid col-md-5 mb-2">
+                                <app-select-year-level-relation-v2
+                                (yearLevelRelationChanged)="onChangeYearLevel($event)"
+                                [school_location_id]="newRuleForm.get('school_location_id')?.value"
+                                [school_level_id]="newRuleForm.get('school_level_id')?.value"
+                                [multiple]="true"
+                                [isDisabled]="!newRuleForm.get('school_location_id')?.value">
+
+                                </app-select-year-level-relation-v2>
+                        </div>
+<!--                        <div class="d-grid col-md-9" style="max-width: 600px; gap: 10px;">-->
+<!--                            <span style="font-size: 14px; font-weight: bold; color: #333;">Rule Name</span>-->
+<!--                            <input placeholder="Category Name"-->
+<!--                                   class="form-control p-3 fs-14 border-1 rounded h-25 w-100"-->
+<!--                                   style="outline: none;" formControlName="rule_name">-->
+<!--                        </div>-->
+                        <div class="d-grid">
+                            <span style="font-size: 14px; font-weight: bold; color: #333;">Rule Description</span>
+                            <textarea class="form-control" rows="3" placeholder="Rule Description..." formControlName="rule_description"></textarea>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="gradient-button col-md-2 mt-3 me-1" [disabled]="disableButtonAdd">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </form>
+</ng-template>
+
+<ng-template #editRule let-modal let-close="close">
+    <form (ngSubmit)="onEditRule()" [formGroup]="editRuleForm">
+        <div class="modal-header">
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="modal-title">Edit Rule</h5>
+                </div>
+            </div>
+        </div>
+        <ng-container>
+            <div class="modal-body">
+                <div class="row float-start mb-5 d-grid col-md-12">
+                    <div class="d-grid col-md-5 mb-2">
+                        <app-select-school-level-relation-v2
+                                [school_location_id]="editRuleForm.get('school_location_id')?.value"
+                                (schoolLevelRelationChanged)="onChangeSchoolLevel($event, true)"
+                                [academic_year]="currentAcademic">
+
+                        </app-select-school-level-relation-v2>
+                    </div>
+                    <div class="d-grid col-md-5 mb-2">
+                        <app-select-year-level-relation-v2
+                                (yearLevelRelationChanged)="onChangeYearLevel($event)"
+                                [school_location_id]="editRuleForm.get('school_location_id')?.value"
+                                [school_level_id]="editRuleForm.get('school_level_id')?.value"
+                                [multiple]="true"
+                                [year_level_ids]="editRuleForm.get('year_level_id')?.value"
+                                [isDisabled]="!editRuleForm.get('school_location_id')?.value">
+
+                        </app-select-year-level-relation-v2>
+                    </div>
+<!--                    <div class="d-grid col-md-9" style="max-width: 600px; gap: 10px;">-->
+<!--                        <span style="font-size: 14px; font-weight: bold; color: #333;">Rule Name</span>-->
+<!--                        <input placeholder="Category Name"-->
+<!--                               class="form-control p-3 fs-14 border-1 rounded h-25 w-100"-->
+<!--                               style="outline: none;" formControlName="rule_name">-->
+<!--                    </div>-->
+                    <div class="d-grid">
+                        <span style="font-size: 14px; font-weight: bold; color: #333;">Rule Description</span>
+                        <textarea class="form-control" rows="3" placeholder="Rule Description..." formControlName="rule_description"></textarea>
+                    </div>
+
                     <div>
-                        <span>
-                            Rule Description:
-                        </span>
-                        <span>
-                                {{detailData.rule_description}}
-                        </span>
+                        <button type="submit" class="gradient-button col-md-2 mt-3 me-1" [disabled]="disableButtonAdd">Save</button>
                     </div>
                 </div>
             </div>
         </ng-container>
+    </form>
 </ng-template>

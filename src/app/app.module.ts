@@ -26,13 +26,16 @@ import {NgOtpInputComponent} from "ng-otp-input";
 import {UserService} from "../shared/services/user.service";
 import {WebsiteService} from "../shared/services/website.service";
 import {WINDOW} from "../shared/providers/window.provider";
-import {Auth} from "../shared/models/auth.model";
 import {AuthComponent} from "./authentication/auth.component";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {FontAwesomeTestingModule} from "@fortawesome/angular-fontawesome/testing";
 import {ExtracurricularCategoryService} from "../shared/services/extracurricular-category.service";
 import {ExtracurricularRuleService} from "../shared/services/extracurricular-rule.service";
 import {MatTableModule} from "@angular/material/table";
+import {RulesModule} from "./pages/rules/rules.module";
+import {SchoolProgramModule} from "./pages/school-program/school-program.module";
+import {SchoolActivityModules} from "./pages/school-activity/school-activity.modules";
+import {PathwayMappingService} from "../shared/services/pathway-mapping.service";
+import {ClassService} from "../shared/services/class.service";
 
 @NgModule({
   declarations: [
@@ -47,7 +50,6 @@ import {MatTableModule} from "@angular/material/table";
     BrowserAnimationsModule,
     FeatherModule.pick(allIcons),
     DemoFlexyModule,
-    DashboardAdminModule,
     ComponentsModule,
     FormsModule,
     HttpClientModule,
@@ -55,7 +57,11 @@ import {MatTableModule} from "@angular/material/table";
     ReactiveFormsModule,
     NgOtpInputComponent,
     FontAwesomeModule,
-    MatTableModule
+    MatTableModule,
+    DashboardAdminModule,
+    RulesModule,
+    SchoolProgramModule,
+      SchoolActivityModules
   ],
   providers: [ ExtracurricularService,
     SettingService,
@@ -71,6 +77,8 @@ import {MatTableModule} from "@angular/material/table";
     WebsiteService,
     ExtracurricularCategoryService,
       ExtracurricularRuleService,
+      PathwayMappingService,
+      ClassService,
     { provide: WINDOW, useValue: window }
   ],
   bootstrap: [AppComponent]
